@@ -2,13 +2,13 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import index from '@/pages/index'
 import inventory from '@/pages/inventory'
+import ipgo from '@/pages/ipgo'
+import chulgo from '@/pages/chulgo'
 import material from '@/pages/material'
-
+import invgroup from '@/pages/invgroup'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
-Vue.use(VueAxios, axios)
-
-Vue.use(Router)
+Vue.use(VueAxios, axios)Vue.use(Router)
 
 export default new Router({
   mode: 'history',
@@ -24,9 +24,24 @@ export default new Router({
           component: inventory
         },
         {
+          path: '/ipgo',
+          name: 'ipgo',
+          component: ipgo
+        },
+        {
+          path: '/chulgo',
+          name: 'chulgo',
+          component: chulgo
+        },
+        {
           path: '/material',
           name: 'material',
           component: material
+        },
+        {
+          path: '/invgroup',
+          name: 'invgroup',
+          component: invgroup
         }
       ]
     }

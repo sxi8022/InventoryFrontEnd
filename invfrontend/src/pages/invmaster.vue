@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3>재고 페이지 입니다.</h3>
+    <h3>마스터 페이지 입니다.</h3>
   </div>
 </template>
 <script>
