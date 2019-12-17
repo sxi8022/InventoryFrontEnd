@@ -13,6 +13,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "@progress/kendo-datasource-vue-wrapper": "^2019.3.1023",
     "@progress/kendo-dateinputs-vue-wrapper": "^2019.3.1023",
     "@progress/kendo-grid-vue-wrapper": "^2019.3.1023",
     "@progress/kendo-theme-default": "^4.9.0",
