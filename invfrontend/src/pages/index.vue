@@ -1,10 +1,10 @@
 <template>
   <div style="width:100%; height:100%; position:fixed" >
     <div style="height:100%; width:100%;">
-      <div style="height:100%;width:30%; float:left;">
+      <div style="height:100%;width:15%; float:left;">
         <Menu></Menu>
       </div>
-      <div style="height:100%; width:70%;">
+      <div style="height:100%; width:85%; float:left">
         <router-view></router-view>
       </div>
     </div>

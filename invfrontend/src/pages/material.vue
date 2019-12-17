@@ -1,44 +1,49 @@
 <template>
-  <div style="width:100%; height:100%; position:fixed">
+  <div style="width:85%; height:100%; position:fixed">
     <div style="height:10%; width:100%">
         <h1>
             {{title}}
         </h1>
     </div>
-    <div style="height:100%; width:100%;">
+    <div style="height:100%; width:85%;">
         <div class="btn">
             <button id="btnAdd">등록</button>
             <button id="btnSearch">조회</button>
         </div>
-        <kendo-grid :data-source="localDataSource"
-                :selectable="'multiple cell'"
-                :sortable="true"
-                :filterable="true"
-                :groupable="true"
-                v-on:change="onChange"
-                v-on:databinding="onDataBinding"
-                v-on:databound="onDataBound"
-                v-on:sort="onSorting"
-                v-on:filter="onFiltering"
-                v-on:group="onGrouping"
-                v-on:groupexpand="onGroupExpand"
-                v-on:groupcollapse="onGroupCollapse">
+        <br/><br/><br/>
+        <div>
+        <kendo-grid id="grid" :data-source="localDataSource">
         </kendo-grid>
+        </div>
     </div>
   </div>
 </template>
 <script>
 // import { Post } from '../api/index'
+// const ApiDefault = {
+//   url: 'http://10.10.11.98/'
+// }
+// ApiDefault.instance = this.axios.create({ baseURL: ApiDefault.url })
 export default {
   data () {
     return {
-      title: '자재 조회'
+      title: '자재 조회',
+      localDataSource: [{
+      }
+      ]
     }
   },
-  created () {
-    this.axios.get('http://10.10.11.98/').then(res => {
-      console.log(res.data)
+  async mounted () {
+    // const response = await ApiDefault.instance.get('')
+    // console.log(response.data)
+    await this.axios.get('http://10.10.11.98/').then(async res => {
+      this.localDataSource.data = res.data
+      $('#grid').data('kendoGrid').dataSource.read()
     })
+  },
+  methods: {
+  },
+  watch: {
   }
 }
 </script>
