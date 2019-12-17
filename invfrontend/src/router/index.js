@@ -8,7 +8,8 @@ import material from '@/pages/material'
 import invgroup from '@/pages/invgroup'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
-Vue.use(VueAxios, axios)Vue.use(Router)
+Vue.use(VueAxios, axios)
+Vue.use(Router)
 
 export default new Router({
   mode: 'history',

@@ -4,7 +4,7 @@
       <div style="height:100%;width:30%; float:left;">
         <Menu></Menu>
       </div>
-      <div style="height:100%; width:70%; padding-right:50px">
+      <div style="height:100%; width:70%;">
         <router-view></router-view>
       </div>
     </div>

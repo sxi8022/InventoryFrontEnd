@@ -6,15 +6,15 @@ import router from './router'
 import '@progress/kendo-ui'
 import '@progress/kendo-theme-default/dist/all.css'
 import { Calendar } from '@progress/kendo-dateinputs-vue-wrapper'
-
+import { Grid, GridInstaller } from '@progress/kendo-grid-vue-wrapper'
 Vue.config.productionTip = false
-
 Vue.component(Calendar.name, Calendar)
+Vue.use(GridInstaller)
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
-  components: { App, Calendar },
+  components: { App, Calendar, Grid },
   template: '<App/>'
 })

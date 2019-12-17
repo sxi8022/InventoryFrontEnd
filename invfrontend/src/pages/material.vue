@@ -10,8 +10,20 @@
             <button id="btnAdd">등록</button>
             <button id="btnSearch">조회</button>
         </div>
-        <div id="grid">
-        </div>
+        <kendo-grid :data-source="localDataSource"
+                :selectable="'multiple cell'"
+                :sortable="true"
+                :filterable="true"
+                :groupable="true"
+                v-on:change="onChange"
+                v-on:databinding="onDataBinding"
+                v-on:databound="onDataBound"
+                v-on:sort="onSorting"
+                v-on:filter="onFiltering"
+                v-on:group="onGrouping"
+                v-on:groupexpand="onGroupExpand"
+                v-on:groupcollapse="onGroupCollapse">
+        </kendo-grid>
     </div>
   </div>
 </template>
@@ -26,50 +38,6 @@ export default {
   created () {
     this.axios.get('http://10.10.11.98/').then(res => {
       console.log(res.data)
-    })
-  },
-  mounted () {
-    var products = [{
-      ProductID: 11,
-      ProductName: 'Chai'
-    }, {
-      ProductID: 22,
-      ProductName: 'Chang'
-    }, {
-      ProductID: 33,
-      ProductName: 'Aniseed Syrup'
-    }, {
-      ProductID: 44,
-      ProductName: "Chef Anton's Cajun Seasoning"
-    }, {
-      ProductID: 55,
-      ProductName: "Chef Anton's Gumbo Mix"
-    }]
-    $('#abc').kendoGrid({
-      dataSource: {
-        data: products,
-        schema: {
-          model: {
-            id: 'ProductID',
-            fields: {
-              ProductName: {
-                type: 'string'
-              }
-            }
-          }
-        },
-        pageSize: 10
-      },
-      toolbar: ['create'],
-      sortable: true,
-      filterable: true,
-      pageable: true,
-      columns: [
-        { field: 'ProductID', title: 'ProductID' },
-        { field: 'ProductName', title: 'ProductName' },
-        { command: 'destroy', title: '&nbsp;' }
-      ],
-      editable: true
     })
   }
 }
