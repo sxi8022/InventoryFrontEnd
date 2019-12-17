@@ -2,10 +2,10 @@
   <div>
     <ul>
       <li id="logo">
-        <div>Inventory</div>
-        <div>Manager</div>
+        <div>재고</div>
+        <div>관리</div>
       </li>
-      <li v-for="list in linklist" :key="list.content">
+      <li class="menulist" v-for="list in linklist" :key="list.content">
         <router-link :to="list.link" >{{ list.content }}</router-link>
       </li>
     </ul>
@@ -18,10 +18,12 @@ export default {
   data () {
     return {
       linklist: [
-        {content: 'HOME', link: '/home'},
-        {content: 'MANAGER', link: '/manager'},
-        {content: 'Inventory', link: '/inventory'},
-        {content: 'RESISTER', link: '/resister'}
+        {content: '홈', link: '/home'},
+        {content: '자재그룹', link: '/invgroup'},
+        {content: '마스터', link: '/invmaster'},
+        {content: '입고', link: '/ipgo'},
+        {content: '재고', link: '/inventory'},
+        {content: '출고', link: '/chulgo'}
       ]
     }
   },
@@ -33,5 +35,8 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+#logo {font-size: 20px;}
+.menulist {font-size: 20px;}
+ul {list-style:none;}
 </style>

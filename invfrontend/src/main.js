@@ -3,13 +3,18 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import '@progress/kendo-ui'
+import '@progress/kendo-theme-default/dist/all.css'
+import { Calendar } from '@progress/kendo-dateinputs-vue-wrapper'
 
 Vue.config.productionTip = false
+
+Vue.component(Calendar.name, Calendar)
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
-  components: { App },
+  components: { App, Calendar },
   template: '<App/>'
 })
