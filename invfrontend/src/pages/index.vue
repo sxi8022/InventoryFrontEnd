@@ -10,7 +10,7 @@
         <Menu></Menu>
       </div>
       <div style="height:100%; width:70%;">
-
+        <router-view></router-view>
       </div>
     </div>
   </div>
