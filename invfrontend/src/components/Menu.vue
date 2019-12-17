@@ -19,7 +19,7 @@ export default {
     return {
       linklist: [
         {content: 'HOME', link: '/home'},
-        {content: 'MANAGER', link: '/manager'},
+        {content: '자재 조회', link: '/material'},
         {content: 'Inventory', link: '/inventory'},
         {content: 'RESISTER', link: '/resister'}
       ]
