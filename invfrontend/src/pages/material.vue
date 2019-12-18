@@ -28,21 +28,16 @@ export default {
   data () {
     return {
       title: '자재 조회',
-      localDataSource: [{
-        'K': 1,
-        'V': 2
-      }
-      ]
+      localDataSource: []
     }
   },
   async mounted () {
     // const response = await ApiDefault.instance.get('')
     // console.log(response.data)
     console.log(this.localDataSource)
-    await this.axios.get('http://10.10.11.98/').then(async res => {
+    await this.axios.get('http://10.10.11.98/Home/MaterialSearch').then(async res => {
       console.log(this.localDataSource)
-      this.localDataSource[0].K = res.data[0].Key
-      this.localDataSource[0].V = res.data[0].Value
+      this.localDataSource.push(res.data[0])
       await $('#grid').data('kendoGrid').dataSource.read()
     })
   },
