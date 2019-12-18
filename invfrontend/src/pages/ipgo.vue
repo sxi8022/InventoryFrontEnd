@@ -27,7 +27,7 @@
         </div>
         <br/><br/><br/>
         <div>
-        <kendo-grid id="gridspe" :data-source="localDataSource">
+        <kendo-grid id="gridspe" :data-source="speDataSource">
         </kendo-grid>
         </div>
       </div>
