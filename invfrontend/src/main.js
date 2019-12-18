@@ -8,6 +8,8 @@ import '@progress/kendo-theme-default/dist/all.css'
 import { Calendar, DateinputsInstaller } from '@progress/kendo-dateinputs-vue-wrapper'
 import { Grid, GridInstaller } from '@progress/kendo-grid-vue-wrapper'
 import { DataSource, TreeListDataSource, DataSourceInstaller } from '@progress/kendo-datasource-vue-wrapper'
+import VModal from 'vue-js-modal'
+Vue.use(VModal, { dynamic: true })
 Vue.config.productionTip = false
 Vue.component(Calendar.name, Calendar)
 Vue.use(GridInstaller)
