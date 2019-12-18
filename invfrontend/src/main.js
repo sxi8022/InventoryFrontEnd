@@ -3,6 +3,8 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import moment from 'moment'
+import VueMomentJS from 'vue-momentjs'
 import '@progress/kendo-ui'
 import '@progress/kendo-theme-default/dist/all.css'
 import { Calendar, DateinputsInstaller } from '@progress/kendo-dateinputs-vue-wrapper'
@@ -16,11 +18,12 @@ Vue.use(GridInstaller)
 Vue.use(DateinputsInstaller)
 Vue.use(TreeListDataSource)
 Vue.use(DataSourceInstaller)
+Vue.use(VueMomentJS, moment)
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
-  components: {App, Calendar, Grid, DataSource},
+  components: {App, Calendar, Grid, DataSource, VueMomentJS, moment},
   template: '<App/>'
 })
