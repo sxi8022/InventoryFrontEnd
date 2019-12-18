@@ -22,7 +22,7 @@
         </div>
         <br/><br/><br/>
         <div>
-        <kendo-grid id="grid" :data-source="localDataSource">
+        <kendo-grid id="grid" :data-source="localDataSource"  :columns="ipgo">
         </kendo-grid>
         </div>
         <br/><br/><br/>
@@ -45,7 +45,11 @@ export default {
       speDataSource: [],
       fromDate: moment(new Date()).add(-1, 'month').format('YYYY-MM-DD'),
       toDate: moment(new Date()).format('YYYY-MM-DD'),
-      stockNo: 0
+      stockNo: 0,
+      ipgo: [
+        { field: 'stockNo', title: '입고번호' },
+        { field: 'ipchulDate', title: '입고일자' }
+      ]
     }
   },
   created () {
@@ -55,7 +59,7 @@ export default {
     // const response = await ApiDefault.instance.get('')
     // console.log(response.data)
     this.getIpgoData()
-    // this.getIpgoSpeData()
+    this.getIpgoSpeData()
     var start = $('#start').data('kendoDatePicker')
     var end = $('#end').data('kendoDatePicker')
     start.max(end.value())
