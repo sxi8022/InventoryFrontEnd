@@ -11,6 +11,19 @@ import { Calendar, DateinputsInstaller } from '@progress/kendo-dateinputs-vue-wr
 import { Grid, GridInstaller } from '@progress/kendo-grid-vue-wrapper'
 import { DataSource, TreeListDataSource, DataSourceInstaller } from '@progress/kendo-datasource-vue-wrapper'
 import VModal from 'vue-js-modal'
+import { Button,
+  ButtonGroup,
+  ButtonGroupButton,
+  ToolBar,
+  ToolBarItem,
+  ButtonsInstaller } from '@progress/kendo-buttons-vue-wrapper'
+import { AutoComplete,
+  ComboBox,
+  DropDownList,
+  MultiSelect,
+  MultiColumnComboBox,
+  MultiColumnComboBoxColumn,
+  DropdownsInstaller } from '@progress/kendo-dropdowns-vue-wrapper'
 Vue.use(VModal, { dynamic: true })
 Vue.config.productionTip = false
 Vue.component(Calendar.name, Calendar)
@@ -19,11 +32,30 @@ Vue.use(DateinputsInstaller)
 Vue.use(TreeListDataSource)
 Vue.use(DataSourceInstaller)
 Vue.use(VueMomentJS, moment)
+Vue.use(ButtonsInstaller)
+Vue.use(DropdownsInstaller)
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
-  components: {App, Calendar, Grid, DataSource, VueMomentJS, moment},
+  components: {
+    App,
+    Calendar,
+    Grid,
+    DataSource,
+    moment,
+    Button,
+    ButtonGroup,
+    ButtonGroupButton,
+    ToolBar,
+    ToolBarItem,
+    AutoComplete,
+    ComboBox,
+    DropDownList,
+    MultiSelect,
+    MultiColumnComboBox,
+    MultiColumnComboBoxColumn
+  },
   template: '<App/>'
 })

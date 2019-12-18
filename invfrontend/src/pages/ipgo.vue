@@ -22,12 +22,12 @@
         </div>
         <br/><br/><br/>
         <div>
-        <kendo-grid id="grid" :data-source="localDataSource"  :columns="ipgo">
+        <kendo-grid id="grid" :data-source="localDataSource" :columns="ipgo" :selectable="'cell'" :sortable="true">
         </kendo-grid>
         </div>
         <br/><br/><br/>
         <div>
-        <kendo-grid id="gridspe" :data-source="speDataSource">
+        <kendo-grid id="gridspe" :data-source="speDataSource" :columns="ipgospe" :sortable="true">
         </kendo-grid>
         </div>
       </div>
@@ -46,9 +46,17 @@ export default {
       fromDate: moment(new Date()).add(-1, 'month').format('YYYY-MM-DD'),
       toDate: moment(new Date()).format('YYYY-MM-DD'),
       stockNo: 0,
-      ipgo: [
-        { field: 'stockNo', title: '입고번호' },
-        { field: 'ipchulDate', title: '입고일자' }
+      ipgo: [{
+        field: 'stockNo', title: '입고번호', type: 'number' },
+      { field: 'ipchulDate', title: '입고일자' }
+      ],
+      ipgospe: [{
+        field: 'stockNo', title: '입고번호', type: 'number', editable: false },
+      { field: 'matNo', title: '자재번호', editable: false },
+      { field: 'matNm', title: '자재명', editable: false },
+      { field: 'itemNo', title: '품번', editable: false },
+      { field: 'ipchulCnt', title: '입고개수', editable: true },
+      { field: 'rmk', title: '비고', editable: true }
       ]
     }
   },
@@ -71,16 +79,16 @@ export default {
     }
   },
   methods: {
-    async getIpgoData () {
+    getIpgoData () {
       console.log(this.localDataSource)
       console.log('http://10.10.11.33/Home/IpgoList?fromDate=' + this.fromDate + '&toDate=' + this.toDate)
       this.localDataSource = []
-      await this.axios.get('http://10.10.11.33/Home/IpgoList?fromDate=' + this.fromDate + '&toDate=' + this.toDate).then(async res => {
+      this.axios.get('http://10.10.11.33/Home/IpgoList?fromDate=' + this.fromDate + '&toDate=' + this.toDate).then(async res => {
         console.log(this.localDataSource)
         for (var i = 0; i < res.data.length; i++) {
           this.localDataSource.push(res.data[i])
         }
-        await $('#grid').data('kendoGrid').dataSource.read()
+        $('#grid').data('kendoGrid').dataSource.read()
       })
     },
     async getIpgoSpeData () {
@@ -128,6 +136,13 @@ export default {
         start.max(endDate)
         end.min(endDate)
       }
+    },
+    showDetails: function (ev) {
+      ev.preventDefault()
+      var gridWidget = this.$refs.gridComponent.kendoWidget()
+      var tr = $(ev.target).closest('tr')
+      var data = gridWidget.dataItem(tr)
+      alert(data.ipchulDate)
     }
   }
 }
