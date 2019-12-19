@@ -1,6 +1,6 @@
 <template>
     <div>
-        <input id="parentData" type="hidden"/>
+        <input id="parentData" type="hidden" v-model="ipgoSpeData"/>
         <input id="stockNo" type="hidden"/>
         <div class="btn">
             <button>닫기</button>
@@ -33,8 +33,17 @@ export default {
       matNm: ''
     }
   },
+  props: ['ipgoSpeData'],
   async mounted () {
     await this.getMaterialData()
+
+    var parentData = $('#parentData').val().split(',')
+    $('#stockNo').val(parentData[0])
+    $('#ipchulDate').val(parentData[1])
+    $('#matNo').val(parentData[1])
+    $('#itemNo').val(parentData[4])
+    $('#ipchulCnt').val(parentData[5])
+    $('#rmk').val(parentData[6])
   },
   methods: {
     closeDialog () {
