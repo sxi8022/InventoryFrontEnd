@@ -31,6 +31,7 @@
         </kendo-grid>
         </div>
       </div>
+      <modals-container v-on:close="getIpgoData"/>
     </div>
 </template>
 
