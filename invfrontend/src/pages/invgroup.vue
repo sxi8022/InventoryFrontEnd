@@ -29,7 +29,7 @@
 </template>
 <script>
 
-import invgroupAdd from '.invgroupAdd.vue'
+// import invgroupEdit from '.invgroupEdit.vue'
 export default {
   data () {
     return {
@@ -51,9 +51,9 @@ export default {
       ]
     }
   },
-  components: {
-    invgroupAdd
-  },
+  // components: {
+  //   invgroupEdit
+  // },
   mounted () {
     this.getMaterialGrpData()
   },
@@ -78,30 +78,30 @@ export default {
         $('#grid2').data('kendoGrid').dataSource.read()
       })
     },
-    showAddDialog() {
-      this.$modal.show(invgroupAdd, {
-      },
-      {
-        name: 'modal1',
-        width: '800px',
-        height: '400px',
-        draggable: true
-      }
-      )
-    },
+    // showAddDialog() {
+    //   this.$modal.show(invgroupEdit, {
+    //   },
+    //   {
+    //     name: 'modal1',
+    //     width: '800px',
+    //     height: '400px',
+    //     draggable: true
+    //   }
+    //   )
+    // },
     onChange (ev) {
       this.selectedGrp = $.map(ev.sender.select(), function (item) {
         var strItem
-        console.log($(item).find('td:eq(0)').text())
+        // console.log($(item).find('td:eq(0)').text())
         strItem = $(item).find('td:eq(0)').text()
         return strItem
       })
       this.getMaterialGrpSubData()
     },
     RegGrp () {
-      this.$modal.show(invgroupAdd, {
-        mat
-      })
+      // this.$modal.show(invgroupEdit, {
+
+      // })
     }
     //   showAddDialog () {
     //   console.log(this.selected)
@@ -116,7 +116,7 @@ export default {
     //   }
     //   )
     // },
-    
+
     // onChange (ev) {
     //   this.selected = $.map(ev.sender.select(), function (item) {
     //     var strItem = ''
