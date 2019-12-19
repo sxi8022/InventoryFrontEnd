@@ -35,7 +35,7 @@ export default {
     await this.getMaterialGrpData()
     this.getMaterialSubGrpData()
 
-    var parentData = $('#parentData').val().split(',');
+    var parentData = $('#parentData').val().split(',')
     $('#matNo').val(parentData[0])
     $('#matGrp').val(parentData[1])
     $('#matSub').val(parentData[2])
@@ -66,12 +66,11 @@ export default {
       })
     },
     saveMaterial () {
-      if($('#matNo').val() != ''){
+      if ($('#matNo').val() !== '') {
         strTemp = 'http://10.10.11.98/Home/MaterialUpdate?' + 'matNo=' + $('#matNo').val() + 'grpCd=' + $('#matGrp').val() + '&subCd=' + $('#matSub').val() + '&matNm=' + $('#materialName').val() + '&itemNo=' + $('#itemNo').val() + '&rmk=' + $('#rmk').val()
       } else {
         strTemp = 'http://10.10.11.98/Home/MaterialAdd?' + 'grpCd=' + $('#matGrp').val() + '&subCd=' + $('#matSub').val() + '&matNm=' + $('#materialName').val() + '&itemNo=' + $('#itemNo').val() + '&rmk=' + $('#rmk').val()
       }
-      
       this.axios.get(strTemp).then(res => {
       })
     }
