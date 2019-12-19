@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import index from '@/pages/index'
-import inventory from '@/pages/inventory'
+import stock from '@/pages/stock'
 import ipgo from '@/pages/ipgo'
 import chulgo from '@/pages/chulgo'
 import material from '@/pages/material'
@@ -20,9 +20,9 @@ export default new Router({
       component: index,
       children: [
         {
-          path: '/inventory',
-          name: 'inventory',
-          component: inventory
+          path: '/stock',
+          name: 'stock',
+          component: stock
         },
         {
           path: '/ipgo',

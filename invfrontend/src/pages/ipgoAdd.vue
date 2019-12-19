@@ -10,13 +10,14 @@
         <br/>
         <br/>
         <div style="margin-left:50px">
-            입고일자 : <input type="text" id="materialName" value="123" />
+            입고일자 : <input type="text" id="ipchulDate" value="123" />
             <br/>
             자재명 : <select @change="getMaterialData" name="mat" id="mat">
             </select>
             <br/>
-            자재소그룹명 : <select name="matSub" id="matSub">
-            </select>
+            품번 : <input type="text" id="itemNo"/>
+            <br/>
+            입고개수 : <input type="text" id="ipchulCnt"/>
             <br/>
             비고 : <input type="text" id="rmk"/>
             <br/>
@@ -38,18 +39,19 @@ export default {
 
     var parentData = $('#parentData').val().split(',')
     $('#stockNo').val(parentData[0])
-    $('#matGrp').val(parentData[1])
-    $('#matSub').val(parentData[2])
-    $('#materialName').val(parentData[3])
+    $('#matNo').val(parentData[1])
+    $('#ipchulDate').val(parentData[2])
+    $('#matNm').val(parentData[3])
     $('#itemNo').val(parentData[4])
-    $('#rmk').val(parentData[7])
+    $('#ipchulCnt').val(parentData[5])
+    $('#rmk').val(parentData[6])
   },
   methods: {
     closeDialog () {
       this.$emit('close')
     },
     async getMaterialData () {
-      await this.axios.get('http://10.10.11.98/Home/MaterialSearch').then(res => {
+      await this.axios.get('http://10.10.11.33/Home/MaterialSearch').then(res => {
         for (var i = 0; i < res.data.length; i++) {
           strTemp = '<option value= ' + res.data[i].matNo + '>' + res.data[i].matNm + '</option>'
           $('#mat').append(strTemp)
@@ -59,9 +61,9 @@ export default {
     },
     saveIpgo () {
       if ($('#stockNo').val() !== '') {
-        strTemp = 'http://10.10.11.98/Home/MaterialUpdate?' + 'matNo=' + $('#matNo').val() + 'grpCd=' + $('#matGrp').val() + '&subCd=' + $('#matSub').val() + '&matNm=' + $('#materialName').val() + '&itemNo=' + $('#itemNo').val() + '&rmk=' + $('#rmk').val()
+        strTemp = 'http://10.10.11.33/Home/MaterialUpdate?' + 'matNo=' + $('#matNo').val() + 'grpCd=' + $('#matGrp').val() + '&subCd=' + $('#matSub').val() + '&matNm=' + $('#materialName').val() + '&itemNo=' + $('#itemNo').val() + '&rmk=' + $('#rmk').val()
       } else {
-        strTemp = 'http://10.10.11.98/Home/MaterialAdd?' + 'grpCd=' + $('#matGrp').val() + '&subCd=' + $('#matSub').val() + '&matNm=' + $('#materialName').val() + '&itemNo=' + $('#itemNo').val() + '&rmk=' + $('#rmk').val()
+        strTemp = 'http://10.10.11.33/Home/MaterialAdd?' + 'grpCd=' + $('#matGrp').val() + '&subCd=' + $('#matSub').val() + '&matNm=' + $('#materialName').val() + '&itemNo=' + $('#itemNo').val() + '&rmk=' + $('#rmk').val()
       }
       this.axios.get(strTemp).then(res => {
       })
