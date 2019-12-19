@@ -20,7 +20,7 @@
         </kendo-grid>
         </div>
     </div>
-    <modals-container/>
+    <modals-container v-on:close="getMaterialData"/>
   </div>
 </template>
 <script>
@@ -66,6 +66,7 @@ export default {
         }
         $('#grid').data('kendoGrid').dataSource.read()
       })
+      this.selected = ''
     },
     showAddDialog () {
       console.log(this.selected)
