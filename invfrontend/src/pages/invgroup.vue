@@ -16,10 +16,10 @@
         <br/><br/><br/>
         <div>
           <h3>대분류</h3>
-          <kendo-grid id="grid1" :data-source="localDataSource1" :height="150">
+          <kendo-grid id="grid1" :data-source="localDataSource1" :height="150" :columns="visibleCol1">
           </kendo-grid>
           <h3>중분류</h3>
-          <kendo-grid id="grid2" :data-source="localDataSource2" :height="150" v-on:change="getMaterialGrpSubData">
+          <kendo-grid id="grid2" :data-source="localDataSource2" :height="150" :columns="visibleCol2">
           </kendo-grid>
         </div>
     </div>
@@ -31,18 +31,31 @@
 //   url: 'http://10.10.11.98/'
 // }
 // ApiDefault.instance = this.axios.create({ baseURL: ApiDefault.url })
+
 export default {
   data () {
     return {
       title: '자재그룹',
       localDataSource1: [],
       localDataSource2: [],
-      grp: ''
+      grp: '',
+      visibleCol1: [
+        {field: 'grpCd', title: '대분류코드'},
+        {filed: 'grpNm', title: '대분류명'},
+        {filed: 'rmk', title: '비고'}
+      ],
+      visibleCol2: [
+        {field: 'grpCd', title: '대분류코드'},
+        {field: 'subCd', title: '소분류코드'},
+        {field: 'grpNm', title: '대분류명'},
+        {field: 'subNm', title: '소분류명'},
+        {field: 'rmk', title: '비고'}
+      ]
     }
   },
   mounted () {
     this.getMaterialGrpData()
-    // this.getMaterialGrpSubData()
+    this.getMaterialGrpSubData()
   },
   methods: {
     getMaterialGrpData () {
