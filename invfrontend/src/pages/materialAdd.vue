@@ -1,21 +1,78 @@
 <template>
     <div>
+        <input id="parentData" type="hidden" v-model="matAdd"/>
+        <input id="matNo" type="hidden"/>
         <div class="btn">
             <button>닫기</button>
-            <button>저장</button>
+            <button @click="saveMaterial">저장</button>
+        </div>
+        <br/>
+        <br/>
+        <div style="margin-left:50px">
+            자재명 : <input type="text" id="materialName" value="123" />
+            <br/>
+            품번 : <input type="text" id="itemNo"/>
+            <br/>
+            자재그룹명 : <select @change="getMaterialSubGrpData" name="matGrp" id="matGrp">
+            </select>
+            <br/>
+            자재소그룹명 : <select name="matSub" id="matSub">
+            </select>
+            <br/>
+            비고 : <input type="text" id="rmk"/>
+            <br/>
         </div>
     </div>
 </template>
 
 <script>
-
+var strTemp = ''
 export default {
   data: () => ({
   }),
   props: ['matAdd'],
+  async mounted () {
+    await this.getMaterialGrpData()
+    this.getMaterialSubGrpData()
+
+    var parentData = $('#parentData').val().split(',');
+    $('#matNo').val(parentData[0])
+    $('#matGrp').val(parentData[1])
+    $('#matSub').val(parentData[2])
+    $('#materialName').val(parentData[3])
+    $('#itemNo').val(parentData[4])
+    $('#rmk').val(parentData[7])
+  },
   methods: {
     closeDialog () {
       this.$emit('close')
+    },
+    async getMaterialGrpData () {
+      await this.axios.get('http://10.10.11.98/Home/MaterialGrpSearch').then(res => {
+        for (var i = 0; i < res.data.length; i++) {
+          strTemp = '<option value= ' + res.data[i].grpCd + '>' + res.data[i].grpNm + '</option>'
+          $('#matGrp').append(strTemp)
+        }
+      })
+      $('#matGrp option:eq(0)').prop('selected', true)
+    },
+    getMaterialSubGrpData () {
+      $('#matSub').empty()
+      this.axios.get('http://10.10.11.98/Home/MaterialSubGrpSearch?grpCd=' + $('#matGrp').val()).then(res => {
+        for (var i = 0; i < res.data.length; i++) {
+          strTemp = '<option value= ' + res.data[i].subCd + '>' + res.data[i].subNm + '</option>'
+          $('#matSub').append(strTemp)
+        }
+      })
+    },
+    saveMaterial () {
+      strTemp = 'http://10.10.11.98/Home/MaterialAdd?' + 'grpCd=' + $('#matGrp').val() + '&subCd=' + $('#matSub').val() + '&matNm=' + $('#materialName').val() + '&itemNo=' + $('#itemNo').val() + '&rmk=' + $('#rmk').val()
+      this.axios.get(strTemp).then(res => {
+        for (var i = 0; i < res.data.length; i++) {
+          strTemp = '<option value= ' + res.data[i].subCd + '>' + res.data[i].subNm + '</option>'
+          $('#matSub').append(strTemp)
+        }
+      })
     }
   }
 }
