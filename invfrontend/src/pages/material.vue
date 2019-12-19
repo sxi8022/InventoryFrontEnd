@@ -15,8 +15,8 @@
         </div>
         <br/><br/><br/>
         <div>
-        <kendo-grid id="grid" :data-source="localDataSource" :height="500"
-                              :columns="columns">
+        <kendo-grid @change="onChange" id="grid" :data-source="localDataSource" :height="500"
+                              :columns="columns" :selectable="true">
         </kendo-grid>
         </div>
     </div>
@@ -30,6 +30,7 @@
 // }
 // ApiDefault.instance = this.axios.create({ baseURL: ApiDefault.url })
 import materialAdd from './materialAdd.vue'
+var selected = ''
 export default {
   data () {
     return {
@@ -37,6 +38,9 @@ export default {
       localDataSource: [],
       material: '',
       columns: [
+        { field: 'matNo', title: '자재번호', hidden: true },
+        { field: 'grpCd', title: '그룹코드', hidden: true },
+        { field: 'subGrpCd', title: '서브그룹코드', hidden: true },
         { field: 'matNm', title: '자재명' },
         { field: 'itemNo', title: '품번' },
         { field: 'grpNm', title: '자재그룹명' },
@@ -54,22 +58,19 @@ export default {
     this.getMaterialData()
   },
   methods: {
-    async getMaterialData () {
-      console.log(this.localDataSource)
-      console.log('http://10.10.11.98/Home/MaterialSearch?matNm=' + this.material)
+    getMaterialData () {
       this.localDataSource = []
-      await this.axios.get('http://10.10.11.98/Home/MaterialSearch?matNm=' + this.material).then(async res => {
-        console.log(this.localDataSource)
+      this.axios.get('http://10.10.11.98/Home/MaterialSearch?matNm=' + this.material).then(res => {
         for (var i = 0; i < res.data.length; i++) {
           this.localDataSource.push(res.data[i])
         }
-        await $('#grid').data('kendoGrid').dataSource.read()
+        $('#grid').data('kendoGrid').dataSource.read()
       })
     },
     showAddDialog () {
+      console.log(this.selected)
       this.$modal.show(materialAdd, {
-        matAdd: 'data',
-        modal: this.$modal
+        matAdd: this.selected
       },
       {
         name: 'modal',
@@ -78,6 +79,17 @@ export default {
         draggable: true
       }
       )
+    },
+    onChange (ev) {
+      this.selected = $.map(ev.sender.select(), function (item) {
+        var strItem = ''
+        $(item).find('td').each(function () {
+          strItem += $(this).text() + ','
+        })
+        strItem = strItem.substr(0, strItem.length - 1)
+        return strItem
+      })
+      this.showAddDialog()
     }
   },
   watch: {
