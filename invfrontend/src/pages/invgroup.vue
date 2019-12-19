@@ -10,13 +10,13 @@
             <button id="btnAdd">등록</button>
             <button @click="getMaterialGrpData" id="btnSearch">조회</button>
         </div>
-        <div>
+        <!-- <div>
           자재명 : <input v-model="material" type="text" id="matNm"/>
-        </div>
-        <br/><br/><br/>
+        </div> -->
+        <br/><br/>
         <div>
           <h3>대분류</h3>
-          <kendo-grid id="grid1" :data-source="localDataSource1" :height="150" :columns="visibleCol1">
+          <kendo-grid @change="onChange" id="grid1" :data-source="localDataSource1" :height="150" :selectable="true">
           </kendo-grid>
           <h3>중분류</h3>
           <kendo-grid id="grid2" :data-source="localDataSource2" :height="150" :columns="visibleCol2">
@@ -26,11 +26,6 @@
   </div>
 </template>
 <script>
-// import { Post } from '../api/index'
-// const ApiDefault = {
-//   url: 'http://10.10.11.98/'
-// }
-// ApiDefault.instance = this.axios.create({ baseURL: ApiDefault.url })
 
 export default {
   data () {
@@ -40,9 +35,18 @@ export default {
       localDataSource2: [],
       grp: '',
       visibleCol1: [
-        {field: 'grpCd', title: '대분류코드'},
-        {filed: 'grpNm', title: '대분류명'},
-        {filed: 'rmk', title: '비고'}
+        // {field: 'grpCd', title: '대분류코드'},
+        // {field: 'subCd', title: '소분류코드'},
+        // {field: 'subNm', title: '소분류명'},
+        // {filed: 'grpNm', title: '대분류명'},
+        // {field: 'seq', title: ' seq'},
+        // {filed: 'rmk', title: '비고'}
+        {field: 'grpCd', title: 'grpCd'},
+        {field: 'subCd', title: 'subCd'},
+        {field: 'subNm', title: 'subNm'},
+        {filed: 'grpNm', title: 'grpNm'},
+        {field: 'seq', title: ' seq'},
+        {filed: 'rmk', title: 'rmk'}
       ],
       visibleCol2: [
         {field: 'grpCd', title: '대분류코드'},
@@ -55,7 +59,6 @@ export default {
   },
   mounted () {
     this.getMaterialGrpData()
-    this.getMaterialGrpSubData()
   },
   methods: {
     getMaterialGrpData () {
@@ -70,12 +73,18 @@ export default {
     },
     getMaterialGrpSubData () {
       this.localDataSource2 = []
-      this.axios.get('http://10.10.11.39/Home/MaterialGrpSubSearch?grpCd=001').then(res => {
+      this.axios.get('http://10.10.11.39/Home/MaterialGrpSubSearch?grpCd=' + this.grp).then(res => {
         for (var i = 0; i < res.data.length; i++) {
           this.localDataSource2.push(res.data[i])
         }
         console.log(this.localDataSource2)
         $('#grid2').data('kendoGrid').dataSource.read()
+      })
+    },
+    onChange (ev) {
+      this.selected = $.map(ev.sender.select(), function (item) {
+        console.log($(item).find('td:eq(0)').text())
+        this.grp = $(item).find('td:eq(0)').text()
       })
     }
   },
