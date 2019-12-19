@@ -58,12 +58,15 @@ export default {
       { field: 'ipchulDate', title: '입고일자', hidden: 'true' },
       { field: 'matNo', title: '자재번호' },
       { field: 'matNm', title: '자재명' },
+      { field: 'stockType', title: '재고유형', hidden: 'true' },
       { field: 'itemNo', title: '품번' },
       { field: 'ipchulCnt', title: '입고개수' },
       { field: 'rmk', title: '비고' }
       ],
       selected: '',
-      selectedSpe: ''
+      selectedSpe: '',
+      selectedstockNo: 0,
+      selectedIpchulDate: ''
     }
   },
   components: {
@@ -76,7 +79,7 @@ export default {
   mounted () {
     // const response = await ApiDefault.instance.get('')
     // console.log(response.data)
-    this.getIpgoData(false)
+    this.getIpgoData()
     this.getIpgoSpeData()
     var start = $('#start').data('kendoDatePicker')
     var end = $('#end').data('kendoDatePicker')
@@ -84,21 +87,25 @@ export default {
     end.min(start.value())
   },
   watch: {
-    fromDate: function (val) {
-      console.log(this.fromDate + '변경')
+    fromDate: function (newval, oldval) {
+      console.log(newval + '로 변경, 기존 : ' + oldval)
+    },
+    toDate: function (newval, oldval) {
+      console.log(newval + '로 변경, 기존 : ' + oldval)
     }
   },
   methods: {
-    getIpgoData (search) {
+    getIpgoData () {
       console.log(this.localDataSource)
       console.log('http://10.10.11.33/Home/IpgoList?fromDate=' + this.fromDate + '&toDate=' + this.toDate)
       this.localDataSource = []
-      this.axios.get('http://10.10.11.33/Home/IpgoList?fromDate=' + this.fromDate + '&toDate=' + this.toDate).then(async res => {
+      this.axios.get('http://10.10.11.33/Home/IpgoList?fromDate=' + this.fromDate + '&toDate=' + this.toDate).then(res => {
         console.log(this.localDataSource)
         for (var i = 0; i < res.data.length; i++) {
           this.localDataSource.push(res.data[i])
         }
         $('#grid').data('kendoGrid').dataSource.read()
+        this.getIpgoSpeData(this.selectedstockNo, this.selectedIpchulDate)
       })
     },
     getIpgoSpeData (stockNo, ipchulDate) {
@@ -129,12 +136,14 @@ export default {
         start.max(endDate)
         end.min(endDate)
       }
+      this.fromDate = moment(startDate).format('YYYY-MM-DD')
+      this.toDate = moment(endDate).format('YYYY-MM-DD')
     },
     endChange: function (e) {
       var start = $('#start').data('kendoDatePicker')
       var end = $('#end').data('kendoDatePicker')
-      var endDate = end.value()
       var startDate = start.value()
+      var endDate = end.value()
       if (endDate) {
         endDate = new Date(endDate)
         endDate.setDate(endDate.getDate())
@@ -146,6 +155,8 @@ export default {
         start.max(endDate)
         end.min(endDate)
       }
+      this.fromDate = moment(startDate).format('YYYY-MM-DD')
+      this.toDate = moment(endDate).format('YYYY-MM-DD')
     },
     showIpgoPopup () {
       console.log(this.selectedSpe)
@@ -186,6 +197,8 @@ export default {
       var transGridData = parentData.split(',')
       var stockNoData = transGridData[0]
       var ipchulDateData = transGridData[1]
+      this.selectedstockNo = stockNoData
+      this.selectedIpchulDate = ipchulDateData
       this.getIpgoSpeData(stockNoData, ipchulDateData)
     },
     onChangeSpe (ev) {
