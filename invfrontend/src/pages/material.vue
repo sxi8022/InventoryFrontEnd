@@ -30,7 +30,6 @@
 // }
 // ApiDefault.instance = this.axios.create({ baseURL: ApiDefault.url })
 import materialAdd from './materialAdd.vue'
-var selected = ''
 export default {
   data () {
     return {
@@ -46,7 +45,8 @@ export default {
         { field: 'grpNm', title: '자재그룹명' },
         { field: 'subGrpNm', title: '자재소그룹명' },
         { field: 'rmk', title: '비고' }
-      ]
+      ],
+      selected: ''
     }
   },
   components: {
