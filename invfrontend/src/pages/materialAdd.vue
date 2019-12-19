@@ -69,11 +69,13 @@ export default {
     },
     saveMaterial () {
       if ($('#matNo').val() !== '') {
-        strTemp = 'http://10.10.11.98/Home/MaterialUpdate?' + 'matNo=' + $('#matNo').val() + 'grpCd=' + $('#matGrp').val() + '&subCd=' + $('#matSub').val() + '&matNm=' + $('#materialName').val() + '&itemNo=' + $('#itemNo').val() + '&rmk=' + $('#rmk').val()
+        strTemp = 'http://10.10.11.98/Home/MaterialUpdate?' + 'matNo=' + $('#matNo').val() + '&grpCd=' + $('#matGrp').val() + '&subCd=' + $('#matSub').val() + '&matNm=' + $('#materialName').val() + '&itemNo=' + $('#itemNo').val() + '&rmk=' + $('#rmk').val()
       } else {
         strTemp = 'http://10.10.11.98/Home/MaterialAdd?' + 'grpCd=' + $('#matGrp').val() + '&subCd=' + $('#matSub').val() + '&matNm=' + $('#materialName').val() + '&itemNo=' + $('#itemNo').val() + '&rmk=' + $('#rmk').val()
       }
       this.axios.get(strTemp).then(res => {
+        alert('저장하였습니다.')
+        this.closeDialog()
       })
     }
   }
