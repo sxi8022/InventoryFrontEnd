@@ -50,7 +50,7 @@ export default {
     },
     saveIpgo () {
       if ($('#stockNo').val() !== '') {
-        strTemp = 'http://10.10.11.33/Home/IpgoUpdate?' + 'stockNo=' + $('#stockNo').val() + 'matNo=' + $('#matNo').val() + '&ipchulCnt=' + $('#ipchulCnt').val() + '&stockType=' + $('#stockType').val() + '&rmk=' + $('#rmk').val() + '&ipchulDate=' + $('#ipchulDate').val()
+        strTemp = 'http://10.10.11.33/Home/IpgoUpdate?' + 'stockNo=' + $('#stockNo').val() + '&matNo=' + $('#matNo').val() + '&ipchulCnt=' + $('#ipchulCnt').val() + '&stockType=' + $('#stockType').val() + '&rmk=' + $('#rmk').val() + '&ipchulDate=' + $('#ipchulDate').val()
       } else {
         strTemp = 'http://10.10.11.33/Home/IpgoAdd?' + 'matNo=' + $('#matNo').val() + '&ipchulCnt=' + $('#ipchulCnt').val() + '&stockType=' + $('#stockType').val() + '&ipchulDate=' + $('#ipchulDate').val() + '&rmk=' + $('#rmk').val()
       }
