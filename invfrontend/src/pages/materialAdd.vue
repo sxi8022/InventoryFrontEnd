@@ -3,13 +3,13 @@
         <input id="parentData" type="hidden" v-model="matAdd"/>
         <input id="matNo" type="hidden"/>
         <div class="btn">
-            <button>닫기</button>
+            <button @click="closeDialog">닫기</button>
             <button @click="saveMaterial">저장</button>
         </div>
         <br/>
         <br/>
         <div style="margin-left:50px">
-            자재명 : <input type="text" id="materialName" value="123" />
+            자재명 : <input type="text" id="materialName" />
             <br/>
             품번 : <input type="text" id="itemNo"/>
             <br/>
@@ -36,12 +36,14 @@ export default {
     this.getMaterialSubGrpData()
 
     var parentData = $('#parentData').val().split(',')
-    $('#matNo').val(parentData[0])
-    $('#matGrp').val(parentData[1])
-    $('#matSub').val(parentData[2])
-    $('#materialName').val(parentData[3])
-    $('#itemNo').val(parentData[4])
-    $('#rmk').val(parentData[7])
+    if (parentData.length > 1) {
+      $('#matNo').val(parentData[0])
+      $('#matGrp').val(parentData[1])
+      $('#matSub').val(parentData[2])
+      $('#materialName').val(parentData[3])
+      $('#itemNo').val(parentData[4])
+      $('#rmk').val(parentData[7])
+    }
   },
   methods: {
     closeDialog () {
