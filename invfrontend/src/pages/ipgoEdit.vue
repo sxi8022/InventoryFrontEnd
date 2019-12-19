@@ -2,6 +2,7 @@
     <div>
         <input id="parentData" type="hidden" v-model="ipgoSpeData"/>
         <input id="stockNo" type="hidden"/>
+        <input id="stockType" type="hidden"/>
         <div class="btn">
             <button @click="closeDialog">닫기</button>
             <button @click="saveIpgo">저장</button>
