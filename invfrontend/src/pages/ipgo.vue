@@ -38,6 +38,7 @@
 <script>
 import moment from 'moment'
 import ipgoAdd from './ipgoAdd.vue'
+import ipgoEdit from './ipgoEdit.vue'
 export default {
   name: 'ipgo',
   data () {
@@ -53,16 +54,21 @@ export default {
       { field: 'ipchulDate', title: '입고일자' }
       ],
       ipgospe: [{
-        field: 'stockNo', title: '입고번호', type: 'number', editable: false },
-      { field: 'matNo', title: '자재번호', editable: false },
-      { field: 'matNm', title: '자재명', editable: false },
-      { field: 'itemNo', title: '품번', editable: false },
-      { field: 'ipchulCnt', title: '입고개수', editable: true },
-      { field: 'rmk', title: '비고', editable: true }
+        field: 'stockNo', title: '입고번호', type: 'number' },
+      { field: 'ipchulDate', title: '입고일자', hidden: 'true' },
+      { field: 'matNo', title: '자재번호' },
+      { field: 'matNm', title: '자재명' },
+      { field: 'itemNo', title: '품번' },
+      { field: 'ipchulCnt', title: '입고개수' },
+      { field: 'rmk', title: '비고' }
       ],
       selected: '',
       selectedSpe: ''
     }
+  },
+  components: {
+    ipgoAdd,
+    ipgoEdit
   },
   created () {
 
@@ -144,7 +150,20 @@ export default {
     showIpgoPopup () {
       console.log(this.selectedSpe)
       this.$modal.show(ipgoAdd, {
-        ipgoAdd: this.selectedSpe
+        ipgoSpeData: this.selectedSpe
+      },
+      {
+        name: 'modal',
+        width: '800px',
+        height: '400px',
+        draggable: true
+      }
+      )
+    },
+    showIpgoSpePopup () {
+      console.log(this.selectedSpe)
+      this.$modal.show(ipgoEdit, {
+        ipgoSpeData: this.selectedSpe
       },
       {
         name: 'modal',
@@ -178,7 +197,7 @@ export default {
         strItem = strItem.substr(0, strItem.length - 1)
         return strItem
       })
-      this.showIpgoPopup()
+      this.showIpgoSpePopup()
     }
   }
 }
