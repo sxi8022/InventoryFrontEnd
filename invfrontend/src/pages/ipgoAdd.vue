@@ -1,115 +1,79 @@
 <template>
-<modal name="demo-login" transition="pop-out" :width="modalWidth" :height="400">
-  <div class="box">
-    <div class="box-part" id="bp-left">
-      <div class="partition" id="partition-register">
-        <div class="partition-title">CREATE ACCOUNT</div>
-        <div class="partition-form">
-          <form autocomplete="false">
-
-            <div class="autocomplete-fix">
-              <input type="password">
-            </div>
-
-            <input id="n-email" type="text" placeholder="Email">
-            <input id="n-username" type="text" placeholder="Username">
-            <input id="n-password2" type="password" placeholder="Password">
-          </form>
-
-          <div style="margin-top: 42px">
-          </div>
-
-          <div class="button-set">
-            <button id="goto-signin-btn">Sign In</button>
-            <button id="register-btn">Register</button>
-          </div>
-
-          <button class="large-btn github-btn">connect with <span>github</span></button>
-          <button class="large-btn facebook-btn">connect with <span>facebook</span></button>
+    <div>
+        <input id="parentData" type="hidden" v-model="ipgoAdd"/>
+        <input id="stockNo" type="hidden"/>
+        <input id="matNo" type="hidden"/>
+        <div class="btn">
+            <button>닫기</button>
+            <button @click="saveIpgo">저장</button>
         </div>
-      </div>
+        <br/>
+        <br/>
+        <div style="margin-left:50px">
+            입고일자 : <input type="text" id="materialName" value="123" />
+            <br/>
+            자재명 : <select @change="getMaterialData" name="mat" id="mat">
+            </select>
+            <br/>
+            자재소그룹명 : <select name="matSub" id="matSub">
+            </select>
+            <br/>
+            비고 : <input type="text" id="rmk"/>
+            <br/>
+        </div>
     </div>
-    <div class="box-part" id="bp-right">
-      <div class="box-messages">
-      </div>
-    </div>
-  </div>
-</modal>
 </template>
+
 <script>
-const MODAL_WIDTH = 656
+var strTemp = ''
 export default {
-  name: 'DemoLoginModal',
   data () {
     return {
-      modalWidth: MODAL_WIDTH
+      msg: '자재 입고 상세 현황'
     }
   },
-  created () {
-    this.modalWidth = window.innerWidth < MODAL_WIDTH
-      ? MODAL_WIDTH / 2
-      : MODAL_WIDTH
+  props: ['ipgoAdd'],
+  async mounted () {
+    await this.getMaterialData()
+
+    var parentData = $('#parentData').val().split(',')
+    $('#stockNo').val(parentData[0])
+    $('#matGrp').val(parentData[1])
+    $('#matSub').val(parentData[2])
+    $('#materialName').val(parentData[3])
+    $('#itemNo').val(parentData[4])
+    $('#rmk').val(parentData[7])
+  },
+  methods: {
+    closeDialog () {
+      this.$emit('close')
+    },
+    async getMaterialData () {
+      await this.axios.get('http://10.10.11.98/Home/MaterialSearch').then(res => {
+        for (var i = 0; i < res.data.length; i++) {
+          strTemp = '<option value= ' + res.data[i].matNo + '>' + res.data[i].matNm + '</option>'
+          $('#mat').append(strTemp)
+        }
+      })
+      $('#mat option:eq(0)').prop('selected', true)
+    },
+    saveIpgo () {
+      if ($('#stockNo').val() !== '') {
+        strTemp = 'http://10.10.11.98/Home/MaterialUpdate?' + 'matNo=' + $('#matNo').val() + 'grpCd=' + $('#matGrp').val() + '&subCd=' + $('#matSub').val() + '&matNm=' + $('#materialName').val() + '&itemNo=' + $('#itemNo').val() + '&rmk=' + $('#rmk').val()
+      } else {
+        strTemp = 'http://10.10.11.98/Home/MaterialAdd?' + 'grpCd=' + $('#matGrp').val() + '&subCd=' + $('#matSub').val() + '&matNm=' + $('#materialName').val() + '&itemNo=' + $('#itemNo').val() + '&rmk=' + $('#rmk').val()
+      }
+      this.axios.get(strTemp).then(res => {
+      })
+    }
   }
 }
 </script>
-<style>
-  .box-messages {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-  }
-  .box-error-message {
-    position: relative;
-    overflow: hidden;
-    box-sizing: border-box;
-    height: 0;
-    line-height: 32px;
-    padding: 0 12px;
-    text-align: center;
-    width: 100%;
-    font-size: 11px;
-    color: white;
-    background: #F38181;
-  }
-  input[type=password],
-  input[type=text] {
-    display: block;
-    box-sizing: border-box;
-    margin-bottom: 4px;
-    width: 100%;
-    font-size: 12px;
-    line-height: 2;
-    border: 0;
-    border-bottom: 1px solid #DDDEDF;
-    padding: 4px 8px;
-    font-family: inherit;
-    transition: 0.5s all;
-    outline: none;
-  }
-  button {
-    background: white;
-    border-radius: 4px;
-    box-sizing: border-box;
-    padding: 10px;
-    letter-spacing: 1px;
-    font-family: "Open Sans", sans-serif;
-    font-weight: 400;
-    min-width: 140px;
-    margin-top: 8px;
-    color: #8b8c8d;
-    cursor: pointer;
-    border: 1px solid #DDDEDF;
-    text-transform: uppercase;
-    transition: 0.1s all;
-    font-size: 10px;
-    outline: none;
-  }
-  .button-set {
-    margin-bottom: 8px;
-  }
-  #register-btn,
-  #signin-btn {
-    margin-left: 8px;
-  }
+<style scoped>
+    .btn button{
+        float: right;
+        background: white;
+        border-color:black;
+        width: 80px;
+    }
 </style>
