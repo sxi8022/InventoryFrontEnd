@@ -2,8 +2,9 @@
     <div>
         <input id="parentData" type="hidden"/>
         <input id="stockNo" type="hidden"/>
+        <input id="stockType" type="hidden" value="I"/>
         <div class="btn">
-            <button>닫기</button>
+            <button @click="closeDialog">닫기</button>
             <button @click="saveIpgo">저장</button>
         </div>
         <br/>
@@ -11,10 +12,8 @@
         <div style="margin-left:50px">
             입고일자 : <input type="text" id="ipchulDate"/>
             <br/>
-            자재명 : <select @change="getMaterialData" name="matNo" id="matNo">
+            자재명 : <select name="matNo" id="matNo">
             </select>
-            <br/>
-            품번 : <input type="text" id="itemNo"/>
             <br/>
             입고개수 : <input type="text" id="ipchulCnt"/>
             <br/>
@@ -51,11 +50,13 @@ export default {
     },
     saveIpgo () {
       if ($('#stockNo').val() !== '') {
-        strTemp = 'http://10.10.11.33/Home/IpgoUpdate?' + 'matNo=' + $('#matNo').val() + 'grpCd=' + $('#matGrp').val() + '&subCd=' + $('#matSub').val() + '&matNm=' + $('#materialName').val() + '&itemNo=' + $('#itemNo').val() + '&rmk=' + $('#rmk').val()
+        strTemp = 'http://10.10.11.33/Home/IpgoUpdate?' + 'stockNo=' + $('#stockNo').val() + 'matNo=' + $('#matNo').val() + '&ipchulCnt=' + $('#ipchulCnt').val() + '&stockType=' + $('#stockType').val() + '&rmk=' + $('#rmk').val() + '&ipchulDate=' + $('#ipchulDate').val()
       } else {
-        strTemp = 'http://10.10.11.33/Home/IpgoAdd?' + 'grpCd=' + $('#matNo').val() + '&subCd=' + $('#matSub').val() + '&matNm=' + $('#materialName').val() + '&itemNo=' + $('#itemNo').val() + '&rmk=' + $('#rmk').val()
+        strTemp = 'http://10.10.11.33/Home/IpgoAdd?' + 'matNo=' + $('#matNo').val() + '&ipchulCnt=' + $('#ipchulCnt').val() + '&stockType=' + $('#stockType').val() + '&ipchulDate=' + $('#ipchulDate').val() + '&rmk=' + $('#rmk').val()
       }
       this.axios.get(strTemp).then(res => {
+        alert('저장하였습니다.')
+        this.closeDialog()
       })
     }
   }
