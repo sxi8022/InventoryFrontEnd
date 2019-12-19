@@ -14,10 +14,13 @@
                 <span>종료:</span>
                 <kendo-datepicker id="end" v-on:change="endChange" :value="toDate" :format="'yyyy-MM-dd'"></kendo-datepicker>
             </div>
-      </div>
+          </div>
+        </div>
+        <div class="row">
+          <modals-container />
         </div>
         <div class="btn">
-            <button id="btnAdd">등록</button>
+            <button id="btnAdd" @click="showModal">등록</button>
             <button id="btnSearch">조회</button>
         </div>
         <br/><br/><br/>
@@ -36,6 +39,7 @@
 
 <script>
 import moment from 'moment'
+import ipgoAdd from './ipgoAdd.vue'
 export default {
   name: 'ipgo',
   data () {
@@ -66,6 +70,7 @@ export default {
   mounted () {
     // const response = await ApiDefault.instance.get('')
     // console.log(response.data)
+    this.showModal()
     this.getIpgoData()
     this.getIpgoSpeData()
     var start = $('#start').data('kendoDatePicker')
@@ -137,12 +142,17 @@ export default {
         end.min(endDate)
       }
     },
-    showDetails: function (ev) {
-      ev.preventDefault()
-      var gridWidget = this.$refs.gridComponent.kendoWidget()
-      var tr = $(ev.target).closest('tr')
-      var data = gridWidget.dataItem(tr)
-      alert(data.ipchulDate)
+    showModal () {
+      this.$modal.show(ipgoAdd, {
+        hot_table: 'data',
+        modal: this.$modal
+      },
+      {
+        name: 'dynamic-modal',
+        width: '330px',
+        height: '130px',
+        draggable: true
+      })
     }
   }
 }
