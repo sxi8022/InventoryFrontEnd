@@ -7,20 +7,17 @@
     </div>
     <div style="height:100%; width:85%;">
         <div class="btn">
-            <button id="btnAdd1" @click="d">대분류 등록</button>
-            <button id="btnAdd2" @click="f">중분류 등록</button>
+            <button id="btnAdd1" @click="showAddDialog1">대분류 등록</button>
+            <button id="btnAdd2" @click="showAddDialog2">중분류 등록</button>
             <button @click="getMaterialGrpData" id="btnSearch">조회</button>
         </div>
-        <!-- <div>
-          자재명 : <input v-model="material" type="text" id="matNm"/>
-        </div> -->
         <br/><br/>
         <div>
           <h3>대분류</h3>
-          <kendo-grid @change="onChange" id="grid1" :data-source="localDataSource1" :height="150" :selectable="true"  :columns="visibleCol1">
+          <kendo-grid @change="onChange" id="grid1" :data-source="localDataSource1" :height="150" :selectable="true" :columns="visibleCol1">
           </kendo-grid>
           <h3>중분류</h3>
-          <kendo-grid id="grid2" :data-source="localDataSource2" :height="150" :columns="visibleCol2">
+          <kendo-grid id="grid2" :data-source="localDataSource2" :height="150" :selectable="true" :columns="visibleCol2">
           </kendo-grid>
         </div>
     </div>
@@ -28,8 +25,7 @@
   </div>
 </template>
 <script>
-
-// import invgroupEdit from '.invgroupEdit.vue'
+import invgroupAdd from './invgroupAdd.vue'
 export default {
   data () {
     return {
@@ -37,6 +33,7 @@ export default {
       localDataSource1: [],
       localDataSource2: [],
       selectedGrp: '',
+      arrSelected: '',
       visibleCol1: [
         {field: 'grpCd', title: '대분류코드'},
         {field: 'grpNm', title: '대분류명'},
@@ -51,9 +48,9 @@ export default {
       ]
     }
   },
-  // components: {
-  //   invgroupEdit
-  // },
+  conponents: {
+    invgroupAdd
+  },
   mounted () {
     this.getMaterialGrpData()
   },
@@ -67,6 +64,7 @@ export default {
         }
         $('#grid1').data('kendoGrid').dataSource.read()
       })
+      this.localDataSource2 = ''
     },
     getMaterialGrpSubData () {
       this.localDataSource2 = []
@@ -74,59 +72,51 @@ export default {
         for (var i = 0; i < res.data.length; i++) {
           this.localDataSource2.push(res.data[i])
         }
-        console.log(this.localDataSource2)
         $('#grid2').data('kendoGrid').dataSource.read()
       })
     },
-    // showAddDialog() {
-    //   this.$modal.show(invgroupEdit, {
-    //   },
-    //   {
-    //     name: 'modal1',
-    //     width: '800px',
-    //     height: '400px',
-    //     draggable: true
-    //   }
-    //   )
-    // },
+    showAddDialog1 () {
+      this.$modal.show(invgroupAdd, {
+        grpAdd: this.arrSelected
+      },
+      {
+        name: 'modal1',
+        width: '500px',
+        height: '300px',
+        draggable: true
+      }
+      )
+    },
+    showAddDialog2 () {
+
+    },
     onChange (ev) {
-      this.selectedGrp = $.map(ev.sender.select(), function (item) {
-        var strItem
-        // console.log($(item).find('td:eq(0)').text())
-        strItem = $(item).find('td:eq(0)').text()
+      this.arrSelected = $.map(ev.sender.select(), function (item) {
+        var strItem = ''
+        var i = 0
+        $(item).find('td').each(function () {
+          strItem += $(this).text() + ','
+          i++
+          if (i === 1) {
+            this.selectedGrp = $(this).text()
+            // console.log(this.selectedGrp)
+          } else if (i === 3) {
+            i = 0
+          }
+        })
         return strItem
       })
+      // console.log(this.selectedGrp)
       this.getMaterialGrpSubData()
-    },
-    RegGrp () {
-      // this.$modal.show(invgroupEdit, {
-
-      // })
     }
-    //   showAddDialog () {
-    //   console.log(this.selected)
-    //   this.$modal.show(materialAdd, {
-    //     matAdd: this.selected
-    //   },
-    //   {
-    //     name: 'modal',
-    //     width: '800px',
-    //     height: '400px',
-    //     draggable: true
-    //   }
-    //   )
-    // },
-
     // onChange (ev) {
-    //   this.selected = $.map(ev.sender.select(), function (item) {
-    //     var strItem = ''
-    //     $(item).find('td').each(function () {
-    //       strItem += $(this).text() + ','
-    //     })
-    //     strItem = strItem.substr(0, strItem.length - 1)
+    //   this.arrSelected = $.map(ev.sender.select(), function (item) {
+    //     var strItem
+    //     strItem = $(item).find('td:eq(0)').text()
     //     return strItem
     //   })
-    //   this.showAddDialog()
+    //   this.selectedgrp = this.arrSelected[0]
+    //   this.getMaterialGrpSubData()
     // }
   },
   watch: {
