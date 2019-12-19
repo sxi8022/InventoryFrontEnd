@@ -64,7 +64,9 @@ export default {
       { field: 'rmk', title: '비고' }
       ],
       selected: '',
-      selectedSpe: ''
+      selectedSpe: '',
+      selectedstockNo: 0,
+      selectedIpchulDate: ''
     }
   },
   components: {
@@ -97,12 +99,13 @@ export default {
       console.log(this.localDataSource)
       console.log('http://10.10.11.33/Home/IpgoList?fromDate=' + this.fromDate + '&toDate=' + this.toDate)
       this.localDataSource = []
-      this.axios.get('http://10.10.11.33/Home/IpgoList?fromDate=' + this.fromDate + '&toDate=' + this.toDate).then(async res => {
+      this.axios.get('http://10.10.11.33/Home/IpgoList?fromDate=' + this.fromDate + '&toDate=' + this.toDate).then(res => {
         console.log(this.localDataSource)
         for (var i = 0; i < res.data.length; i++) {
           this.localDataSource.push(res.data[i])
         }
         $('#grid').data('kendoGrid').dataSource.read()
+        this.getIpgoSpeData(this.selectedstockNo, this.selectedIpchulDate)
       })
     },
     getIpgoSpeData (stockNo, ipchulDate) {
@@ -194,6 +197,8 @@ export default {
       var transGridData = parentData.split(',')
       var stockNoData = transGridData[0]
       var ipchulDateData = transGridData[1]
+      this.selectedstockNo = stockNoData
+      this.selectedIpchulDate = ipchulDateData
       this.getIpgoSpeData(stockNoData, ipchulDateData)
     },
     onChangeSpe (ev) {
