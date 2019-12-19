@@ -41,7 +41,7 @@ export default {
       $('#stockNo').val(parentData[0])
       $('#ipchulDate').val(parentData[1])
       $('#matNo').val(parentData[2])
-      $('#stockType').val(parentData[5])
+      $('#stockType').val(parentData[4])
       $('#ipchulCnt').val(parentData[6])
       $('#rmk').val(parentData[7])
     }
