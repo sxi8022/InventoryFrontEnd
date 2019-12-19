@@ -35,12 +35,6 @@ export default {
       localDataSource2: [],
       grp: '',
       visibleCol1: [
-        // {field: 'grpCd', title: '대분류코드'},
-        // {field: 'subCd', title: '소분류코드'},
-        // {field: 'subNm', title: '소분류명'},
-        // {filed: 'grpNm', title: '대분류명'},
-        // {field: 'seq', title: ' seq'},
-        // {filed: 'rmk', title: '비고'}
         {field: 'grpCd', title: 'grpCd'},
         {field: 'subCd', title: 'subCd'},
         {field: 'subNm', title: 'subNm'},
@@ -86,6 +80,7 @@ export default {
         console.log($(item).find('td:eq(0)').text())
         this.grp = $(item).find('td:eq(0)').text()
       })
+      this.getMaterialGrpSubData()
     }
   },
   watch: {
