@@ -38,12 +38,14 @@ export default {
     await this.getMaterialData()
 
     var parentData = $('#parentData').val().split(',')
-    $('#stockNo').val(parentData[0])
-    $('#ipchulDate').val(parentData[1])
-    $('#matNo').val(parentData[1])
-    $('#itemNo').val(parentData[4])
-    $('#ipchulCnt').val(parentData[5])
-    $('#rmk').val(parentData[6])
+    if (parentData.length > 1) {
+      $('#stockNo').val(parentData[0])
+      $('#ipchulDate').val(parentData[1])
+      $('#matNo').val(parentData[2])
+      $('#itemNo').val(parentData[4])
+      $('#ipchulCnt').val(parentData[5])
+      $('#rmk').val(parentData[6])
+    }
   },
   methods: {
     closeDialog () {
