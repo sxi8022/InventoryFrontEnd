@@ -2,8 +2,7 @@
   <div>
     <ul>
       <li id="logo">
-        <div>재고</div>
-        <div>관리</div>
+        <div>재고관리 메뉴</div>
       </li>
       <li class="menulist" v-for="list in linklist" :key="list.content">
         <router-link :to="list.link" >{{ list.content }}</router-link>
