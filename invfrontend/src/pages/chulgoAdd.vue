@@ -2,20 +2,20 @@
     <div>
         <input id="parentData" type="hidden"/>
         <input id="stockNo" type="hidden"/>
-        <input id="stockType" type="hidden" value="I"/>
+        <input id="stockType" type="hidden" value="O"/>
         <div class="btn">
             <button @click="closeDialog">닫기</button>
-            <button @click="saveIpgo">저장</button>
+            <button @click="savechulgo">저장</button>
         </div>
         <br/>
         <br/>
         <div style="margin-left:50px">
-            입고일자 : <input type="text" id="ipchulDate"/>
+            출고일자 : <input type="text" id="ipchulDate"/>
             <br/>
             자재명 : <select name="matNo" id="matNo">
             </select>
             <br/>
-            입고개수 : <input type="text" id="ipchulCnt"/>
+            출고개수 : <input type="text" id="ipchulCnt"/>
             <br/>
             비고 : <input type="text" id="rmk"/>
             <br/>
@@ -28,7 +28,7 @@ var strTemp = ''
 export default {
   data () {
     return {
-      msg: '자재 입고 상세 현황',
+      msg: '자재 출고 상세 현황',
       matNm: ''
     }
   },
@@ -48,11 +48,11 @@ export default {
       })
       $('#matNo option:eq(0)').prop('selected', true)
     },
-    saveIpgo () {
+    savechulgo () {
       if ($('#stockNo').val() !== '') {
-        strTemp = 'http://10.10.11.33/Home/IpgoUpdate?' + 'stockNo=' + $('#stockNo').val() + '&matNo=' + $('#matNo').val() + '&ipchulCnt=' + $('#ipchulCnt').val() + '&stockType=' + $('#stockType').val() + '&rmk=' + $('#rmk').val() + '&ipchulDate=' + $('#ipchulDate').val()
+        strTemp = 'http://10.10.11.33/Home/ChulgoUpdate?' + 'stockNo=' + $('#stockNo').val() + '&matNo=' + $('#matNo').val() + '&ipchulCnt=' + $('#ipchulCnt').val() + '&stockType=' + $('#stockType').val() + '&rmk=' + $('#rmk').val() + '&ipchulDate=' + $('#ipchulDate').val()
       } else {
-        strTemp = 'http://10.10.11.33/Home/IpgoAdd?' + 'stockNo=' + '0' + '&matNo=' + $('#matNo').val() + '&ipchulCnt=' + $('#ipchulCnt').val() + '&stockType=' + $('#stockType').val() + '&ipchulDate=' + $('#ipchulDate').val() + '&rmk=' + $('#rmk').val()
+        strTemp = 'http://10.10.11.33/Home/ChulgoAdd?' + 'stockNo=' + '0' + '&matNo=' + $('#matNo').val() + '&ipchulCnt=' + $('#ipchulCnt').val() + '&stockType=' + $('#stockType').val() + '&ipchulDate=' + $('#ipchulDate').val() + '&rmk=' + $('#rmk').val()
       }
       this.axios.get(strTemp).then(res => {
         alert('저장하였습니다.')
