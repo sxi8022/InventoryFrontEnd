@@ -12,8 +12,7 @@
         <div style="margin-left:50px">
             입고일자 : <input type="text" id="ipchulDate"/>
             <br/>
-            자재명 : <select name="matNo" id="matNo">
-            </select>
+            자재명 : <select name="matNo" id="matNo"></select>
             <br/>
             입고개수 : <input type="text" id="ipchulCnt"/>
             <br/>
@@ -40,7 +39,7 @@ export default {
       this.$emit('close')
     },
     async getMaterialData () {
-      await this.axios.get('http://10.10.11.33/Home/MaterialSearch').then(res => {
+      await this.axios.get('http://10.10.11.98/Home/MaterialSearch').then(res => {
         for (var i = 0; i < res.data.length; i++) {
           strTemp = '<option value= ' + res.data[i].matNo + '>' + res.data[i].matNm + '</option>'
           $('#matNo').append(strTemp)
@@ -49,10 +48,22 @@ export default {
       $('#matNo option:eq(0)').prop('selected', true)
     },
     saveIpgo () {
+      if ($('#matNo').val() === '' || $('#matNo').val() === null || $('#matNo').val() === undefined) {
+        alert('자재를 선택해주세요.')
+        return false
+      }
+      if ($('#ipchulCnt').val() === '' || $('#ipchulCnt').val() === null || $('#ipchulCnt').val() === undefined) {
+        alert('개수를 선택해주세요.')
+        return false
+      }
+      if ($('#ipchulDate').val() === '' || $('#ipchulDate').val() === null || $('#ipchulDate').val() === undefined) {
+        alert('입출고일자를 선택해주세요.')
+        return false
+      }
       if ($('#stockNo').val() !== '') {
-        strTemp = 'http://10.10.11.33/Home/IpgoUpdate?' + 'stockNo=' + $('#stockNo').val() + '&matNo=' + $('#matNo').val() + '&ipchulCnt=' + $('#ipchulCnt').val() + '&stockType=' + $('#stockType').val() + '&rmk=' + $('#rmk').val() + '&ipchulDate=' + $('#ipchulDate').val()
+        strTemp = 'http://10.10.11.98/Home/IpgoUpdate?' + 'stockNo=' + $('#stockNo').val() + '&matNo=' + $('#matNo').val() + '&ipchulCnt=' + $('#ipchulCnt').val() + '&stockType=' + $('#stockType').val() + '&rmk=' + $('#rmk').val() + '&ipchulDate=' + $('#ipchulDate').val()
       } else {
-        strTemp = 'http://10.10.11.33/Home/IpgoAdd?' + 'stockNo=' + '0' + '&matNo=' + $('#matNo').val() + '&ipchulCnt=' + $('#ipchulCnt').val() + '&stockType=' + $('#stockType').val() + '&ipchulDate=' + $('#ipchulDate').val() + '&rmk=' + $('#rmk').val()
+        strTemp = 'http://10.10.11.98/Home/IpgoAdd?' + 'stockNo=' + '0' + '&matNo=' + $('#matNo').val() + '&ipchulCnt=' + $('#ipchulCnt').val() + '&stockType=' + $('#stockType').val() + '&ipchulDate=' + $('#ipchulDate').val() + '&rmk=' + $('#rmk').val()
       }
       this.axios.get(strTemp).then(res => {
         alert('저장하였습니다.')
