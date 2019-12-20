@@ -5,6 +5,7 @@
         <div class="btn">
             <button @click="closeDialog">닫기</button>
             <button @click="saveMaterial">저장</button>
+            <button v-if="flag" @click="deleteMaterial">삭제</button>
         </div>
         <br/>
         <br/>
@@ -29,6 +30,7 @@
 var strTemp = ''
 export default {
   data: () => ({
+    flag: true
   }),
   props: ['matAdd'],
   async mounted () {
@@ -43,6 +45,10 @@ export default {
       $('#materialName').val(parentData[3])
       $('#itemNo').val(parentData[4])
       $('#rmk').val(parentData[7])
+    }
+
+    if ($('#matNo').val() === '') {
+      this.flag = false
     }
   },
   methods: {
@@ -75,6 +81,13 @@ export default {
       }
       this.axios.get(strTemp).then(res => {
         alert('저장하였습니다.')
+        this.closeDialog()
+      })
+    },
+    deleteMaterial () {
+      strTemp = 'http://10.10.11.98/Home/MaterialDelete?' + 'matNo=' + $('#matNo').val()
+      this.axios.get(strTemp).then(res => {
+        alert('삭제하였습니다.')
         this.closeDialog()
       })
     }

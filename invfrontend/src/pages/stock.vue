@@ -14,12 +14,11 @@
         </div>
         <br/><br/><br/>
         <div>
-        <kendo-grid @change="onChange" id="grid" :data-source="localDataSource" :height="500"
+        <kendo-grid id="grid" :data-source="localDataSource" :height="500"
                               :columns="columns" :selectable="true">
         </kendo-grid>
         </div>
     </div>
-    <modals-container v-on:close="getStockData"/>
   </div>
 </template>
 <script>
@@ -62,30 +61,6 @@ export default {
         $('#grid').data('kendoGrid').dataSource.read()
       })
       this.selected = ''
-    },
-    showAddDialog () {
-      console.log(this.selected)
-      this.$modal.show(materialAdd, {
-        matAdd: this.selected
-      },
-      {
-        name: 'modal',
-        width: '800px',
-        height: '400px',
-        draggable: true
-      }
-      )
-    },
-    onChange (ev) {
-      this.selected = $.map(ev.sender.select(), function (item) {
-        var strItem = ''
-        $(item).find('td').each(function () {
-          strItem += $(this).text() + ','
-        })
-        strItem = strItem.substr(0, strItem.length - 1)
-        return strItem
-      })
-      this.showAddDialog()
     }
   },
   watch: {
