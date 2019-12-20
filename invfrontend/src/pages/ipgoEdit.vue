@@ -87,7 +87,8 @@ export default {
         strTemp = 'http://10.10.11.98/Home/IpgoDelete?' + 'stockNo=' + $('#stockNo').val() + '&matNo=' + $('#matNo').val() + '&ipchulDate=' + $('#ipchulDate').val() + '&stockType=' + $('#stockType').val()
       }
       this.axios.get(strTemp).then(res => {
-        this.$emit('close')
+        alert('삭제하였습니다.')
+        this.closeDialog()
       })
     }
   }
