@@ -18,7 +18,7 @@ export default {
   data () {
     return {
       linklist: [
-        {content: '홈', link: '/home'},
+        {content: '홈', link: '/'},
         {content: '자재그룹', link: '/invgroup'},
         {content: '자재마스터', link: '/material'},
         {content: '입고', link: '/ipgo'},
