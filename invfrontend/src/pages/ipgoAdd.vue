@@ -39,7 +39,7 @@ export default {
       this.$emit('close')
     },
     async getMaterialData () {
-      await this.axios.get('http://10.10.11.98/Home/MaterialSearch').then(res => {
+      await this.axios.get('http://10.10.11.33/Home/MaterialSearch').then(res => {
         for (var i = 0; i < res.data.length; i++) {
           strTemp = '<option value= ' + res.data[i].matNo + '>' + res.data[i].matNm + '</option>'
           $('#matNo').append(strTemp)
@@ -61,9 +61,9 @@ export default {
         return false
       }
       if ($('#stockNo').val() !== '') {
-        strTemp = 'http://10.10.11.98/Home/IpgoUpdate?' + 'stockNo=' + $('#stockNo').val() + '&matNo=' + $('#matNo').val() + '&ipchulCnt=' + $('#ipchulCnt').val() + '&stockType=' + $('#stockType').val() + '&rmk=' + $('#rmk').val() + '&ipchulDate=' + $('#ipchulDate').val()
+        strTemp = 'http://10.10.11.33/Home/IpgoUpdate?' + 'stockNo=' + $('#stockNo').val() + '&matNo=' + $('#matNo').val() + '&ipchulCnt=' + $('#ipchulCnt').val() + '&stockType=' + $('#stockType').val() + '&rmk=' + $('#rmk').val() + '&ipchulDate=' + $('#ipchulDate').val()
       } else {
-        strTemp = 'http://10.10.11.98/Home/IpgoAdd?' + 'stockNo=' + '0' + '&matNo=' + $('#matNo').val() + '&ipchulCnt=' + $('#ipchulCnt').val() + '&stockType=' + $('#stockType').val() + '&ipchulDate=' + $('#ipchulDate').val() + '&rmk=' + $('#rmk').val()
+        strTemp = 'http://10.10.11.33/Home/IpgoAdd?' + 'stockNo=' + '0' + '&matNo=' + $('#matNo').val() + '&ipchulCnt=' + $('#ipchulCnt').val() + '&stockType=' + $('#stockType').val() + '&ipchulDate=' + $('#ipchulDate').val() + '&rmk=' + $('#rmk').val()
       }
       this.axios.get(strTemp).then(res => {
         alert('저장하였습니다.')

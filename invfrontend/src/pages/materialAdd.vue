@@ -56,7 +56,7 @@ export default {
       this.$emit('close')
     },
     async getMaterialGrpData () {
-      await this.axios.get('http://10.10.11.98/Home/MaterialGrpSearch').then(res => {
+      await this.axios.get('http://10.10.11.33/Home/MaterialGrpSearch').then(res => {
         for (var i = 0; i < res.data.length; i++) {
           strTemp = '<option value= ' + res.data[i].grpCd + '>' + res.data[i].grpNm + '</option>'
           $('#matGrp').append(strTemp)
@@ -66,7 +66,7 @@ export default {
     },
     getMaterialSubGrpData () {
       $('#matSub').empty()
-      this.axios.get('http://10.10.11.98/Home/MaterialSubGrpSearch?grpCd=' + $('#matGrp').val()).then(res => {
+      this.axios.get('http://10.10.11.33/Home/MaterialSubGrpSearch?grpCd=' + $('#matGrp').val()).then(res => {
         for (var i = 0; i < res.data.length; i++) {
           strTemp = '<option value= ' + res.data[i].subCd + '>' + res.data[i].subNm + '</option>'
           $('#matSub').append(strTemp)
@@ -75,9 +75,9 @@ export default {
     },
     saveMaterial () {
       if ($('#matNo').val() !== '') {
-        strTemp = 'http://10.10.11.98/Home/MaterialUpdate?' + 'matNo=' + $('#matNo').val() + '&grpCd=' + $('#matGrp').val() + '&subCd=' + $('#matSub').val() + '&matNm=' + $('#materialName').val() + '&itemNo=' + $('#itemNo').val() + '&rmk=' + $('#rmk').val()
+        strTemp = 'http://10.10.11.33/Home/MaterialUpdate?' + 'matNo=' + $('#matNo').val() + '&grpCd=' + $('#matGrp').val() + '&subCd=' + $('#matSub').val() + '&matNm=' + $('#materialName').val() + '&itemNo=' + $('#itemNo').val() + '&rmk=' + $('#rmk').val()
       } else {
-        strTemp = 'http://10.10.11.98/Home/MaterialAdd?' + 'grpCd=' + $('#matGrp').val() + '&subCd=' + $('#matSub').val() + '&matNm=' + $('#materialName').val() + '&itemNo=' + $('#itemNo').val() + '&rmk=' + $('#rmk').val()
+        strTemp = 'http://10.10.11.33/Home/MaterialAdd?' + 'grpCd=' + $('#matGrp').val() + '&subCd=' + $('#matSub').val() + '&matNm=' + $('#materialName').val() + '&itemNo=' + $('#itemNo').val() + '&rmk=' + $('#rmk').val()
       }
       this.axios.get(strTemp).then(res => {
         alert('저장하였습니다.')
@@ -85,7 +85,7 @@ export default {
       })
     },
     deleteMaterial () {
-      strTemp = 'http://10.10.11.98/Home/MaterialDelete?' + 'matNo=' + $('#matNo').val()
+      strTemp = 'http://10.10.11.33/Home/MaterialDelete?' + 'matNo=' + $('#matNo').val()
       this.axios.get(strTemp).then(res => {
         alert('삭제하였습니다.')
         this.closeDialog()
