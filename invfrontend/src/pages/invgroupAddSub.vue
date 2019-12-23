@@ -13,7 +13,7 @@
         <div style="margin-left:50px">
             대분류명 : <input type="text" id="txtGroupNm" disabled="true"/>
             <br/>
-            소분류명 : <input type="text" id="txtGroupSubNm" />
+            중분류명 : <input type="text" id="txtGroupSubNm" />
             <br/>
             비고    : <input type="text" id="txtRmk"/>
             <br/>

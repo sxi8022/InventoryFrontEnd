@@ -11,13 +11,13 @@
             <button id="btnAdd2" @click="showAddDialog2(false)">중분류 등록</button>
             <button @click="getMaterialGrpData" id="btnSearch">조회</button>
         </div>
-        <br/><br/>
+        <br/>
         <div>
           <h3>대분류</h3>
           <kendo-grid @change="onChange" id="grid1" :data-source="localDataSource1" :height="150" :selectable="true" :columns="visibleCol1">
           </kendo-grid>
           <h3>중분류</h3>
-          <kendo-grid @change="onChangeSub" id="grid2" :data-source="localDataSource2" :height="250" :selectable="true" :columns="visibleCol2">
+          <kendo-grid @change="onChangeSub" id="grid2" :data-source="localDataSource2" :height="200" :selectable="true" :columns="visibleCol2">
           </kendo-grid>
         </div>
     </div>
