@@ -24,7 +24,7 @@
 <script>
 // import { Post } from '../api/index'
 // const ApiDefault = {
-//   url: 'http://10.10.11.98/'
+//   url: 'http://10.10.11.33/'
 // }
 // ApiDefault.instance = this.axios.create({ baseURL: ApiDefault.url })
 import materialAdd from './materialAdd.vue'
@@ -54,7 +54,7 @@ export default {
   methods: {
     getStockData () {
       this.localDataSource = []
-      this.axios.get('http://10.10.11.98/Home/StockSearch?matNm=' + this.material).then(res => {
+      this.axios.get('http://10.10.11.33/Home/StockSearch?matNm=' + this.material).then(res => {
         for (var i = 0; i < res.data.length; i++) {
           this.localDataSource.push(res.data[i])
         }

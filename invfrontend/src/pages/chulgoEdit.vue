@@ -51,7 +51,7 @@ export default {
       this.$emit('close')
     },
     async getMaterialData () {
-      await this.axios.get('http://10.10.11.98/Home/MaterialSearch').then(res => {
+      await this.axios.get('http://10.10.11.33/Home/MaterialSearch').then(res => {
         for (var i = 0; i < res.data.length; i++) {
           strTemp = '<option value= ' + res.data[i].matNo + '>' + res.data[i].matNm + '</option>'
           $('#matNo').append(strTemp)
@@ -73,9 +73,9 @@ export default {
         return false
       }
       if ($('#stockNo').val() !== '') {
-        strTemp = 'http://10.10.11.98/Home/chulgoUpdate?' + 'stockNo=' + $('#stockNo').val() + '&matNo=' + $('#matNo').val() + '&ipchulCnt=' + $('#ipchulCnt').val() + '&stockType=' + $('#stockType').val() + '&rmk=' + $('#rmk').val() + '&ipchulDate=' + $('#ipchulDate').val()
+        strTemp = 'http://10.10.11.33/Home/chulgoUpdate?' + 'stockNo=' + $('#stockNo').val() + '&matNo=' + $('#matNo').val() + '&ipchulCnt=' + $('#ipchulCnt').val() + '&stockType=' + $('#stockType').val() + '&rmk=' + $('#rmk').val() + '&ipchulDate=' + $('#ipchulDate').val()
       } else {
-        strTemp = 'http://10.10.11.98/Home/ChulgoAdd?' + 'stockNo=' + '0' + '&matNo=' + $('#matNo').val() + '&ipchulCnt=' + $('#ipchulCnt').val() + '&stockType=' + $('#stockType').val() + '&ipchulDate=' + $('#ipchulDate').val() + '&rmk=' + $('#rmk').val()
+        strTemp = 'http://10.10.11.33/Home/ChulgoAdd?' + 'stockNo=' + '0' + '&matNo=' + $('#matNo').val() + '&ipchulCnt=' + $('#ipchulCnt').val() + '&stockType=' + $('#stockType').val() + '&ipchulDate=' + $('#ipchulDate').val() + '&rmk=' + $('#rmk').val()
       }
       this.axios.get(strTemp).then(res => {
         alert('저장하였습니다.')
@@ -84,7 +84,7 @@ export default {
     },
     delchulgo () {
       if ($('#stockNo').val() !== '') {
-        strTemp = 'http://10.10.11.98/Home/chulgoDelete?' + 'stockNo=' + $('#stockNo').val() + '&matNo=' + $('#matNo').val() + '&ipchulDate=' + $('#ipchulDate').val() + '&stockType=' + $('#stockType').val()
+        strTemp = 'http://10.10.11.33/Home/chulgoDelete?' + 'stockNo=' + $('#stockNo').val() + '&matNo=' + $('#matNo').val() + '&ipchulDate=' + $('#ipchulDate').val() + '&stockType=' + $('#stockType').val()
       }
       this.axios.get(strTemp).then(res => {
         alert('삭제하였습니다.')
