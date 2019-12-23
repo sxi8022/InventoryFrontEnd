@@ -85,7 +85,7 @@ export default {
       },
       {
         name: 'modal1',
-        width: '300px',
+        width: '400px',
         height: '200px',
         draggable: true
       }
@@ -99,7 +99,7 @@ export default {
         },
         {
           name: 'modal1',
-          width: '300px',
+          width: '400px',
           height: '200px',
           draggable: true
         }
@@ -111,7 +111,7 @@ export default {
         },
         {
           name: 'modal1',
-          width: '300px',
+          width: '400px',
           height: '200px',
           draggable: true
         }
