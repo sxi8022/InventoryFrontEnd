@@ -40,9 +40,9 @@ export default {
     saveMaterialGrp () {
       console.log($('#hidGroupCd').val())
       if ($('#hidGroupCd').val() !== '') {
-        strTemp = 'http://10.10.11.98/Home/MatGrpUpdate?' + 'grpCd=' + $('#hidGroupCd').val() + '&grpNm=' + $('#txtGroupNm').val() + '&rmk=' + $('#txtRmk').val()
+        strTemp = 'http://10.10.11.33/Home/MatGrpUpdate?' + 'grpCd=' + $('#hidGroupCd').val() + '&grpNm=' + $('#txtGroupNm').val() + '&rmk=' + $('#txtRmk').val()
       } else {
-        strTemp = 'http://10.10.11.98/Home/MatGrpAdd?' + 'grpNm=' + $('#txtGroupNm').val() + '&rmk=' + $('#txtRmk').val()
+        strTemp = 'http://10.10.11.33/Home/MatGrpAdd?' + 'grpNm=' + $('#txtGroupNm').val() + '&rmk=' + $('#txtRmk').val()
       }
       console.log(strTemp)
       this.axios.get(strTemp).then(res => {
@@ -53,7 +53,7 @@ export default {
     deleteMaterialGrp () {
       console.log($('#hidGroupCd').val())
       if ($('#hidGroupCd').val() !== '') {
-        strTemp = 'http://10.10.11.98/Home/MatGrpDelete?' + 'grpCd=' + $('#hidGroupCd').val()
+        strTemp = 'http://10.10.11.33/Home/MatGrpDelete?' + 'grpCd=' + $('#hidGroupCd').val()
         console.log(strTemp)
         this.axios.get(strTemp).then(res => {
           alert('삭제하였습니다.')
