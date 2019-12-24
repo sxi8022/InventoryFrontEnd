@@ -68,11 +68,5 @@ export default {
   }
 }
 </script>
-<style scoped>
-    .btn button{
-        float: right;
-        background: white;
-        border-color:black;
-        width: 80px;
-    }
+<style>
 </style>
