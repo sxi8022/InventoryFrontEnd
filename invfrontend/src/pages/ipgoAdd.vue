@@ -1,25 +1,31 @@
 <template>
-    <div>
-        <input id="parentData" type="hidden"/>
-        <input id="stockNo" type="hidden"/>
-        <input id="stockType" type="hidden" value="I"/>
-        <div class="btn">
-            <button @click="closeDialog">닫기</button>
-            <button @click="saveIpgo">저장</button>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="btn-group float-right mt-2">
+          <button @click="saveIpgo" class="btn btn-primary mr-1">저장</button>
+          <button @click="closeDialog" class="btn btn-dark">닫기</button>
         </div>
-        <br/>
-        <br/>
-        <div style="margin-left:50px">
-            입고일자 : <input type="text" id="ipchulDate"/>
-            <br/>
-            자재명 : <select name="matNo" id="matNo"></select>
-            <br/>
-            입고개수 : <input type="text" id="ipchulCnt"/>
-            <br/>
-            비고 : <input type="text" id="rmk"/>
-            <br/>
-        </div>
+      </div>
     </div>
+    <br/>
+    <br/>
+    <div class="row">
+      <input id="parentData" type="hidden"/>
+      <input id="stockNo" type="hidden"/>
+      <input id="stockType" type="hidden" value="I"/>
+      <div style="margin-left:50px">
+          입고일자 : <input type="text" id="ipchulDate"/>
+          <br/>
+          자재명 : <select name="matNo" id="matNo"></select>
+          <br/>
+          입고개수 : <input type="text" id="ipchulCnt"/>
+          <br/>
+          비고 : <input type="text" id="rmk"/>
+          <br/>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
