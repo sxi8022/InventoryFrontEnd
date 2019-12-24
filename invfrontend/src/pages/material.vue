@@ -1,24 +1,35 @@
 <template>
   <div style="width:85%; height:100%; position:fixed">
-    <div style="height:10%; width:85%">
+    <div class="row mt-1 mb-2">
+      <div class="col-xs-9 col-sm-9 col-md-9 col-lg-10 d-flex justify-content-center" style="height:10%; width:100%">
         <h1>
-            {{title}}
+          {{title}}
         </h1>
+      </div>
+      <div class="col-xs-3 col-sm-3 col-md-3 col-lg-2">
+      </div>
     </div>
     <div style="height:100%; width:85%;">
-        <div class="btn">
-            <button @click="showAddDialog" id="btnAdd">등록</button>
-            <button @click="getMaterialData" id="btnSearch">조회</button>
+      <div id="search" class="row">
+        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-10 d-flex justify-content-center pl-5">
+          <div>
+               자재명 : <input v-on:keyup.enter="getMaterialData" v-model="material" type="text" id="matNm"/>
+          </div>
         </div>
-        <div style="float:left;">
-          자재명 : <input v-on:keyup.enter="getMaterialData" v-model="material" type="text" id="matNm"/>
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-2">
+          <!-- mt, mr 마진 속성 -->
+          <div class="btn-group float-right mt-2">
+            <button @click="showAddDialog" id="btnAdd" class="btn btn-primary mr-1">등록</button>
+            <button @click="getMaterialData" id="btnSearch" class="btn btn-primary">조회</button>
+          </div>
         </div>
-        <br/><br/><br/>
-        <div>
-        <kendo-grid @change="onChange" id="grid" :data-source="localDataSource" :height="500"
-                              :columns="columns" :selectable="true">
-        </kendo-grid>
-        </div>
+      </div>
+      <br/><br/><br/>
+      <div>
+      <kendo-grid @change="onChange" id="grid" :data-source="localDataSource" :height="500"
+                            :columns="columns" :selectable="true">
+      </kendo-grid>
+      </div>
     </div>
     <modals-container v-on:close="getMaterialData"/>
   </div>
@@ -97,11 +108,5 @@ export default {
   }
 }
 </script>
-<style scoped>
-    .btn button{
-        float: right;
-        background: white;
-        border-color:black;
-        width: 80px;
-    }
+<style>
 </style>

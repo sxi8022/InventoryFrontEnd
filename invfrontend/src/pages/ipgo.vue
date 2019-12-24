@@ -9,7 +9,7 @@
       </div>
       <div style="height:100%; width:85%;">
         <div id="search" class="row">
-           <div class="col-xs-9 col-sm-9 col-md-9 col-lg-10 d-flex justify-content-center pl-5" style="display:inline-flex">
+           <div class="col-xs-9 col-sm-9 col-md-9 col-lg-10 d-flex justify-content-center pl-5">
              <div>
                <span>시작:</span>
                <kendo-datepicker id="start" v-on:change="startChange" :value="fromDate" :format="'yyyy-MM-dd'"></kendo-datepicker>
@@ -223,8 +223,4 @@ export default {
 }
 </script>
 <style>
-.btn button{
-    float: right;
-    width: 80px;
-}
 </style>
