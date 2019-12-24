@@ -1,24 +1,31 @@
 <template>
     <div style="width:85%; height:100%; position:fixed">
-      <div style="height:10%; width:100%">
-        <h1>{{ msg }}</h1>
+      <div class="row mt-1 mb-2">
+        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-10 d-flex justify-content-center" style="height:10%; width:100%">
+          <h1>{{ msg }}</h1>
+        </div>
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-2">
+        </div>
       </div>
       <div style="height:100%; width:85%;">
-        <div id="search" class="search">
-           <div style="display:inline-flex">
-            <div style="margin-right:20px">
-                <span>시작:</span>
-                <kendo-datepicker id="start" v-on:change="startChange" :value="fromDate" :format="'yyyy-MM-dd'"></kendo-datepicker>
-            </div>
-            <div>
+        <div id="search" class="row">
+           <div class="col-xs-9 col-sm-9 col-md-9 col-lg-10 d-flex justify-content-center pl-5" style="display:inline-flex">
+             <div>
+               <span>시작:</span>
+               <kendo-datepicker id="start" v-on:change="startChange" :value="fromDate" :format="'yyyy-MM-dd'"></kendo-datepicker>
+             </div>
+             <div class="ml-4">
                 <span>종료:</span>
                 <kendo-datepicker id="end" v-on:change="endChange" :value="toDate" :format="'yyyy-MM-dd'"></kendo-datepicker>
+             </div>
+          </div>
+          <div class="col-xs-3 col-sm-3 col-md-3 col-lg-2">
+            <!-- mt, mr 마진 속성 -->
+            <div class="btn-group float-right mt-2">
+              <button id="btnAdd" class="btn btn-primary mr-1" @click="showIpgoPopup">등록</button>
+              <button id="btnSearch"  class="btn btn-primary" @click="getIpgoData">조회</button>
             </div>
           </div>
-        </div>
-        <div class="btn">
-            <button id="btnAdd" @click="showIpgoPopup">등록</button>
-            <button id="btnSearch" @click="getIpgoData">조회</button>
         </div>
         <br/><br/><br/>
         <div>
@@ -218,8 +225,6 @@ export default {
 <style>
 .btn button{
     float: right;
-    background: white;
-    border-color:black;
     width: 80px;
 }
 </style>

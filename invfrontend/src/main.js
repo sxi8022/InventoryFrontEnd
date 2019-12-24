@@ -11,6 +11,8 @@ import { Calendar, DateinputsInstaller } from '@progress/kendo-dateinputs-vue-wr
 import { Grid, GridInstaller } from '@progress/kendo-grid-vue-wrapper'
 import { DataSource, TreeListDataSource, DataSourceInstaller } from '@progress/kendo-datasource-vue-wrapper'
 import VModal from 'vue-js-modal'
+import 'bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css'
 import { Button,
   ButtonGroup,
   ButtonGroupButton,
