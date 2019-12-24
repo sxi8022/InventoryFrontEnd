@@ -4,7 +4,7 @@
       <div class="col-md-12">
         <div class="btn-group float-right mt-2">
           <button @click="savechulgo" class="btn btn-primary mr-1">저장</button>
-          <button @click="delchulgo" class="btn btn-primary mr-1">삭제</button>
+          <button @click="delchulgo" class="btn btn-warning mr-1">삭제</button>
           <button @click="closeDialog" class="btn btn-dark">닫기</button>
         </div>
       </div>

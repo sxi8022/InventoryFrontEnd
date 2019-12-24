@@ -1,24 +1,30 @@
 <template>
-    <div>
-        <input id="parentData" type="hidden" v-model="grpSubAdd"/>
-        <input id="hidGroupCd" type="hidden"/>
-        <input id="hidGroupSubCd" type="hidden"/>
-        <div class="btn">
-            <button @click="closeDialog(false)">닫기</button>
-            <button @click="deleteMaterialGrp">삭제</button>
-            <button @click="saveMaterialGrp">저장</button>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="btn-group float-right mt-2">
+          <button @click="saveMaterialGrp" class="btn btn-primary mr-1">저장</button>
+          <button @click="deleteMaterialGrp" class="btn btn-warning mr-1">삭제</button>
+          <button @click="closeDialog(false)" class="btn btn-dark">닫기</button>
         </div>
-        <br/>
-        <br/>
-        <div style="margin-left:50px">
+      </div>
+    </div>
+    <br/>
+    <br/>
+    <div class="row">
+      <input id="parentData" type="hidden" v-model="grpSubAdd"/>
+      <input id="hidGroupCd" type="hidden"/>
+      <input id="hidGroupSubCd" type="hidden"/>
+      <div style="margin-left:50px">
             대분류명 : <input type="text" id="txtGroupNm" disabled="true"/>
             <br/>
             중분류명 : <input type="text" id="txtGroupSubNm" />
             <br/>
             비고    : <input type="text" id="txtRmk"/>
             <br/>
-        </div>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>

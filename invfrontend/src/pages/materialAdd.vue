@@ -4,7 +4,7 @@
       <div class="col-md-12">
         <div class="btn-group float-right mt-2">
           <button @click="saveMaterial" class="btn btn-primary mr-1">저장</button>
-          <button v-if="flag" @click="deleteMaterial" class="btn btn-primary mr-1">삭제</button>
+          <button v-if="flag" @click="deleteMaterial" class="btn btn-warning mr-1">삭제</button>
           <button @click="closeDialog" class="btn btn-dark">닫기</button>
         </div>
       </div>
