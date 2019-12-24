@@ -1,29 +1,35 @@
 <template>
-    <div>
-        <input id="parentData" type="hidden" v-model="matAdd"/>
-        <input id="matNo" type="hidden"/>
-        <div class="btn">
-            <button @click="closeDialog">닫기</button>
-            <button @click="saveMaterial">저장</button>
-            <button v-if="flag" @click="deleteMaterial">삭제</button>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="btn-group float-right mt-2">
+          <button @click="saveMaterial" class="btn btn-primary mr-1">저장</button>
+          <button v-if="flag" @click="deleteMaterial" class="btn btn-primary mr-1">삭제</button>
+          <button @click="closeDialog" class="btn btn-dark">닫기</button>
         </div>
-        <br/>
-        <br/>
-        <div style="margin-left:50px">
-            자재명 : <input type="text" id="materialName" />
-            <br/>
-            품번 : <input type="text" id="itemNo"/>
-            <br/>
-            자재그룹명 : <select @change="getMaterialSubGrpData" name="matGrp" id="matGrp">
-            </select>
-            <br/>
-            자재소그룹명 : <select name="matSub" id="matSub">
-            </select>
-            <br/>
-            비고 : <input type="text" id="rmk"/>
-            <br/>
-        </div>
+      </div>
     </div>
+    <br/>
+    <br/>
+    <div class="row">
+      <input id="parentData" type="hidden" v-model="matAdd"/>
+      <input id="matNo" type="hidden"/>
+      <div style="margin-left:50px">
+          자재명 : <input type="text" id="materialName" />
+          <br/>
+          품번 : <input type="text" id="itemNo"/>
+          <br/>
+          자재그룹명 : <select @change="getMaterialSubGrpData" name="matGrp" id="matGrp">
+          </select>
+          <br/>
+          자재소그룹명 : <select name="matSub" id="matSub">
+          </select>
+          <br/>
+          비고 : <input type="text" id="rmk"/>
+          <br/>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
