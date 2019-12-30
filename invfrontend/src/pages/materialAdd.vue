@@ -62,7 +62,7 @@ export default {
       this.$emit('close')
     },
     async getMaterialGrpData () {
-      await this.axios.get('http://10.10.11.98:801:801/api/MaterialGrp').then(res => {
+      await this.axios.get('http://10.10.11.98:801/api/MaterialGrp').then(res => {
         for (var i = 0; i < res.data.length; i++) {
           strTemp = '<option value= ' + res.data[i].grpCd + '>' + res.data[i].grpNm + '</option>'
           $('#matGrp').append(strTemp)
@@ -72,7 +72,7 @@ export default {
     },
     getMaterialSubGrpData () {
       $('#matSub').empty()
-      this.axios.get('http://10.10.11.98:801:801/api/MaterialGrp/' + $('#matGrp').val()).then(res => {
+      this.axios.get('http://10.10.11.98:801/api/MaterialGrp/' + $('#matGrp').val()).then(res => {
         for (var i = 0; i < res.data.length; i++) {
           strTemp = '<option value= ' + res.data[i].subCd + '>' + res.data[i].subNm + '</option>'
           $('#matSub').append(strTemp)
@@ -88,7 +88,7 @@ export default {
         itemNo: $('#itemNo').val(),
         rmk: $('#rmk').val()
       }
-      strTemp = 'http://10.10.11.98:801:801/api/Material'
+      strTemp = 'http://10.10.11.98:801/api/Material'
       if ($('#matNo').val() === '') {
         this.axios.post(strTemp, requestData).then(res => {
           alert('저장하였습니다.')
@@ -102,7 +102,7 @@ export default {
       }
     },
     deleteMaterial () {
-      strTemp = 'http://10.10.11.98:801:801/api/Material/' + $('#matNo').val()
+      strTemp = 'http://10.10.11.98:801/api/Material/' + $('#matNo').val()
       this.axios.delete(strTemp).then(res => {
         alert('삭제하였습니다.')
         this.closeDialog()
