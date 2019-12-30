@@ -57,7 +57,7 @@ export default {
       this.$emit('close')
     },
     async getMaterialData () {
-      await this.axios.get('http://10.10.11.98/Home/MaterialSearch').then(res => {
+      await this.axios.get('http://10.10.11.98:801/api/Material').then(res => {
         for (var i = 0; i < res.data.length; i++) {
           strTemp = '<option value= ' + res.data[i].matNo + '>' + res.data[i].matNm + '</option>'
           $('#matNo').append(strTemp)
@@ -78,21 +78,32 @@ export default {
         alert('입출고일자를 선택해주세요.')
         return false
       }
-      if ($('#stockNo').val() !== '') {
-        strTemp = 'http://10.10.11.98/Home/chulgoUpdate?' + 'stockNo=' + $('#stockNo').val() + '&matNo=' + $('#matNo').val() + '&ipchulCnt=' + $('#ipchulCnt').val() + '&stockType=' + $('#stockType').val() + '&rmk=' + $('#rmk').val() + '&ipchulDate=' + $('#ipchulDate').val()
-      } else {
-        strTemp = 'http://10.10.11.98/Home/ChulgoAdd?' + 'stockNo=' + '0' + '&matNo=' + $('#matNo').val() + '&ipchulCnt=' + $('#ipchulCnt').val() + '&stockType=' + $('#stockType').val() + '&ipchulDate=' + $('#ipchulDate').val() + '&rmk=' + $('#rmk').val()
+      var requestData = {
+        stockNo: $('#stockNo').val(),
+        matNo: $('#matNo').val(),
+        ipchulCnt: $('#ipchulCnt').val(),
+        stockType: $('#stockType').val(),
+        ipchulDate: $('#ipchulDate').val(),
+        rmk: $('#rmk').val()
       }
-      this.axios.get(strTemp).then(res => {
-        alert('저장하였습니다.')
-        this.closeDialog()
-      })
+      strTemp = 'http://10.10.11.98:801/api/Chulgo'
+      if ($('#stockNo').val() !== '') {
+        this.axios.put(strTemp, requestData).then(res => {
+          alert('저장하였습니다.')
+          this.closeDialog()
+        })
+      } else {
+        this.axios.post(strTemp, requestData).then(res => {
+          alert('저장하였습니다.')
+          this.closeDialog()
+        })
+      }
     },
     delchulgo () {
       if ($('#stockNo').val() !== '') {
-        strTemp = 'http://10.10.11.98/Home/chulgoDelete?' + 'stockNo=' + $('#stockNo').val() + '&matNo=' + $('#matNo').val() + '&ipchulDate=' + $('#ipchulDate').val() + '&stockType=' + $('#stockType').val()
+        strTemp = 'http://10.10.11.98:801/api/Chulgo?' + 'stockNo=' + $('#stockNo').val() + '&matNo=' + $('#matNo').val() + '&ipchulDate=' + $('#ipchulDate').val() + '&stockType=' + $('#stockType').val()
       }
-      this.axios.get(strTemp).then(res => {
+      this.axios.delete(strTemp).then(res => {
         alert('삭제하였습니다.')
         this.closeDialog()
       })

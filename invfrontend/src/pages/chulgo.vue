@@ -103,9 +103,9 @@ export default {
   methods: {
     getchulgoData () {
       console.log(this.chulgoDataSource)
-      console.log('http://10.10.11.98/Home/ChulgoList?fromDate=' + this.fromDate + '&toDate=' + this.toDate)
+      console.log('http://10.10.11.98:801/api/ChulgoList?fromDate=' + this.fromDate + '&toDate=' + this.toDate)
       this.chulgoDataSource = []
-      this.axios.get('http://10.10.11.98/Home/ChulgoList?fromDate=' + this.fromDate + '&toDate=' + this.toDate).then(res => {
+      this.axios.get('http://10.10.11.98:801/api/ChulgoList?fromDate=' + this.fromDate + '&toDate=' + this.toDate).then(res => {
         console.log(this.chulgoDataSource)
         for (var i = 0; i < res.data.length; i++) {
           this.chulgoDataSource.push(res.data[i])
@@ -116,9 +116,9 @@ export default {
     },
     getchulgoSpeData (stockNo, ipchulDate) {
       console.log(this.speChulgoDataSource)
-      console.log('http://10.10.11.98/Home/chulgoSpeList?stockNo=' + stockNo)
+      console.log('http://10.10.11.98:801/api/chulgoSpeList?stockNo=' + stockNo)
       this.speChulgoDataSource = []
-      this.axios.get('http://10.10.11.98/Home/chulgoSpeList?stockNo=' + stockNo).then(res => {
+      this.axios.get('http://10.10.11.98:801/api/chulgoSpeList?stockNo=' + stockNo).then(res => {
         console.log(this.speChulgoDataSource)
         for (var i = 0; i < res.data.length; i++) {
           this.speChulgoDataSource.push(res.data[i])
