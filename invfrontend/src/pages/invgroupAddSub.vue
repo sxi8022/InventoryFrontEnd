@@ -59,7 +59,7 @@ export default {
       this.$emit('close')
     },
     saveMaterialGrp () {
-      strTemp = 'http://localhost:801/api/MaterialSubGrp'
+      strTemp = 'http://10.10.11.98:801:801/api/MaterialSubGrp'
       if ($('#hidGroupCd').val() !== '' && $('#hidGroupSubCd').val() !== '') {
         this.axios.put(strTemp, this.matSubGrp).then(res => {
           alert('저장하였습니다.')
@@ -76,7 +76,7 @@ export default {
     deleteMaterialGrp () {
     //   console.log($('#hidGroupCd').val())
       if ($('#hidGroupCd').val() !== '' && $('#hidGroupSubCd').val() !== '') {
-        strTemp = 'http://localhost:801/api/MaterialSubGrp?grpCd=' + this.matSubGrp.grpCd + '&subCd=' + this.matSubGrp.subCd
+        strTemp = 'http://10.10.11.98:801:801/api/MaterialSubGrp?grpCd=' + this.matSubGrp.grpCd + '&subCd=' + this.matSubGrp.subCd
         this.axios.delete(strTemp).then(res => {
           alert('삭제하였습니다.')
           this.closeDialog(true)
