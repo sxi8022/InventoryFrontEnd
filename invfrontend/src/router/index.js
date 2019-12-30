@@ -6,6 +6,7 @@ import ipgo from '@/pages/ipgo'
 import chulgo from '@/pages/chulgo'
 import material from '@/pages/material'
 import invgroup from '@/pages/invgroup'
+import login from '@/pages/login'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 Vue.use(VueAxios, axios)
@@ -19,6 +20,11 @@ export default new Router({
       name: 'index',
       component: index,
       children: [
+        {
+          path: '/',
+          name: 'login',
+          component: login
+        },
         {
           path: '/stock',
           name: 'stock',
