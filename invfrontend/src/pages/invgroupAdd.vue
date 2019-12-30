@@ -13,11 +13,11 @@
     <br/>
     <div class="row">
       <input id="parentData" type="hidden" v-model="grpAdd"/>
-      <input id="hidGroupCd" type="hidden"/>
+      <input id="hidGroupCd" type="hidden" v-model="matGrp.grpCd"/>
       <div style="margin-left:50px">
-          대분류명 : <input type="text" id="txtGroupNm" />
+          대분류명 : <input type="text" id="txtGroupNm" v-model="matGrp.grpNm"/>
           <br/>
-          비고    : <input type="text" id="txtRmk"/>
+          비고    : <input type="text" id="txtRmk" v-model="matGrp.rmk"/>
           <br/>
       </div>
     </div>
@@ -28,6 +28,8 @@
 var strTemp = ''
 export default {
   data: () => ({
+    matGrp: {
+    }
   }),
   props: ['grpAdd'],
   async mounted () {
@@ -44,24 +46,24 @@ export default {
       this.$emit('close', change)
     },
     saveMaterialGrp () {
-      console.log($('#hidGroupCd').val())
-      if ($('#hidGroupCd').val() !== '') {
-        strTemp = 'http://10.10.11.33/Home/MatGrpUpdate?' + 'grpCd=' + $('#hidGroupCd').val() + '&grpNm=' + $('#txtGroupNm').val() + '&rmk=' + $('#txtRmk').val()
+      strTemp = 'http://localhost:801/api/MaterialGrp'
+      if ($('#hidGroupCd').val() === '') {
+        this.axios.post(strTemp, this.matGrp).then(res => {
+          alert('저장하였습니다.')
+          this.closeDialog(true)
+        })
       } else {
-        strTemp = 'http://10.10.11.33/Home/MatGrpAdd?' + 'grpNm=' + $('#txtGroupNm').val() + '&rmk=' + $('#txtRmk').val()
+        this.axios.put(strTemp, this.matGrp).then(res => {
+          alert('저장하였습니다.')
+          this.closeDialog(true)
+        })
       }
-      console.log(strTemp)
-      this.axios.get(strTemp).then(res => {
-        alert('저장하였습니다.')
-        this.closeDialog(true)
-      })
     },
     deleteMaterialGrp () {
       console.log($('#hidGroupCd').val())
       if ($('#hidGroupCd').val() !== '') {
-        strTemp = 'http://10.10.11.33/Home/MatGrpDelete?' + 'grpCd=' + $('#hidGroupCd').val()
-        console.log(strTemp)
-        this.axios.get(strTemp).then(res => {
+        strTemp = 'http://localhost:801/api/MaterialGrp/' + $('#hidGroupCd').val()
+        this.axios.delete(strTemp).then(res => {
           alert('삭제하였습니다.')
           this.closeDialog(true)
         })

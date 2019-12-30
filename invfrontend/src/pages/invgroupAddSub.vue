@@ -13,24 +13,30 @@
     <br/>
     <div class="row">
       <input id="parentData" type="hidden" v-model="grpSubAdd"/>
-      <input id="hidGroupCd" type="hidden"/>
-      <input id="hidGroupSubCd" type="hidden"/>
+      <input id="hidGroupCd" v-model="matSubGrp.grpCd" type="hidden"/>
+      <input id="hidGroupSubCd" v-model="matSubGrp.subCd" type="hidden"/>
       <div style="margin-left:50px">
-            대분류명 : <input type="text" id="txtGroupNm" disabled="true"/>
+            대분류명 : <input type="text" id="txtGroupNm" v-model="matSubGrp.grpNm" disabled="true"/>
             <br/>
-            중분류명 : <input type="text" id="txtGroupSubNm" />
+            중분류명 : <input type="text" id="txtGroupSubNm" v-model="matSubGrp.subNm" />
             <br/>
-            비고    : <input type="text" id="txtRmk"/>
+            비고    : <input type="text" id="txtRmk" v-model="matSubGrp.rmk"/>
             <br/>
       </div>
     </div>
   </div>
 </template>
-
 <script>
 var strTemp = ''
 export default {
   data: () => ({
+    matSubGrp: {
+      grpCd: '',
+      subCd: '',
+      grpNm: '',
+      subNm: '',
+      rmk: ''
+    }
   }),
   props: ['grpSubAdd'],
   async mounted () {
@@ -38,14 +44,14 @@ export default {
     console.log(parentData[0])
     if (parentData.length === 6) {
       console.log('ddd111')
-      $('#hidGroupCd').val(parentData[0])
-      $('#hidGroupSubCd').val(parentData[1])
-      $('#txtGroupNm').val(parentData[2])
-      $('#txtGroupSubNm').val(parentData[3])
-      $('#txtRmk').val(parentData[4])
+      this.matSubGrp.grpCd = parentData[0]
+      this.matSubGrp.subCd = parentData[1]
+      this.matSubGrp.grpNm = parentData[2]
+      this.matSubGrp.subNm = parentData[3]
+      this.matSubGrp.rmk = parentData[4]
     } else {
-      $('#hidGroupCd').val(parentData[0])
-      $('#txtGroupNm').val(parentData[1])
+      this.matSubGrp.grpCd = parentData[0]
+      this.matSubGrp.grpNm = parentData[1]
     }
   },
   methods: {
@@ -53,23 +59,25 @@ export default {
       this.$emit('close')
     },
     saveMaterialGrp () {
-      console.log($('#hidGroupSubCd').val())
+      strTemp = 'http://localhost:801/api/MaterialSubGrp'
       if ($('#hidGroupCd').val() !== '' && $('#hidGroupSubCd').val() !== '') {
-        strTemp = 'http://10.10.11.33/Home/MatGrpSubUpdate?' + 'grpCd=' + $('#hidGroupCd').val() + '&subCd=' + $('#hidGroupSubCd').val() + '&grpSubNm=' + $('#txtGroupSubNm').val() + '&rmk=' + $('#txtRmk').val()
+        this.axios.put(strTemp, this.matSubGrp).then(res => {
+          alert('저장하였습니다.')
+          this.closeDialog(true)
+        })
       } else {
-        strTemp = 'http://10.10.11.33/Home/MatGrpSubAdd?' + 'grpCd=' + $('#hidGroupCd').val() + '&grpNm=' + $('#txtGroupSubNm').val() + '&rmk=' + $('#txtRmk').val()
+        this.axios.post(strTemp, this.matSubGrp).then(res => {
+          alert('저장하였습니다.')
+          this.closeDialog(true)
+        })
       }
       console.log(strTemp)
-      this.axios.get(strTemp).then(res => {
-        alert('저장하였습니다.')
-        this.closeDialog(true)
-      })
     },
     deleteMaterialGrp () {
     //   console.log($('#hidGroupCd').val())
       if ($('#hidGroupCd').val() !== '' && $('#hidGroupSubCd').val() !== '') {
-        strTemp = 'http://10.10.11.33/Home/MatGrpSubDelete?' + 'grpCd=' + $('#hidGroupCd').val() + '&subCd=' + $('#hidGroupSubCd').val()
-        this.axios.get(strTemp).then(res => {
+        strTemp = 'http://localhost:801/api/MaterialSubGrp?grpCd=' + this.matSubGrp.grpCd + '&subCd=' + this.matSubGrp.subCd
+        this.axios.delete(strTemp).then(res => {
           alert('삭제하였습니다.')
           this.closeDialog(true)
         })
