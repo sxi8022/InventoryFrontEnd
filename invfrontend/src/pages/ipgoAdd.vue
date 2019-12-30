@@ -15,7 +15,10 @@
       <input id="stockNo" type="hidden"/>
       <input id="stockType" type="hidden" value="I"/>
       <div style="margin-left:50px">
-          입고일자 : <input type="text" id="ipchulDate"/>
+          입고일자 :
+           <kendo-datepicker id="ipchulDate"
+                      :value="currentDate"
+                      :format="'yyyy-MM-dd'"></kendo-datepicker>
           <br/>
           자재명 : <select name="matNo" id="matNo"></select>
           <br/>
@@ -34,7 +37,8 @@ export default {
   data () {
     return {
       msg: '자재 입고 상세 현황',
-      matNm: ''
+      matNm: '',
+      currentDate: new Date()
     }
   },
   async mounted () {

@@ -15,7 +15,10 @@
       <input id="stockNo" type="hidden"/>
       <input id="stockType" type="hidden" value="O"/>
       <div style="margin-left:50px">
-          출고일자 : <input type="text" id="ipchulDate"/>
+          출고일자 :
+            <kendo-datepicker id="ipchulDate"
+                      :value="currentDate"
+                      :format="'yyyy-MM-dd'"></kendo-datepicker>
           <br/>
           자재명 : <select name="matNo" id="matNo"></select>
           <br/>
@@ -34,7 +37,8 @@ export default {
   data () {
     return {
       msg: '자재 출고 상세 현황',
-      matNm: ''
+      matNm: '',
+      currentDate: new Date()
     }
   },
   async mounted () {
@@ -67,11 +71,11 @@ export default {
         return false
       }
       var requestData = {
+        stockNo: $('#stockNo').val(),
         matNo: $('#matNo').val(),
-        grpCd: $('#matGrp').val(),
-        subGrpCd: $('#matSub').val(),
-        matNm: $('#materialName').val(),
-        itemNo: $('#itemNo').val(),
+        ipchulCnt: $('#ipchulCnt').val(),
+        stockType: $('#stockType').val(),
+        ipchulDate: $('#ipchulDate').val(),
         rmk: $('#rmk').val()
       }
       strTemp = 'http://10.10.11.98:801/api/Chulgo'

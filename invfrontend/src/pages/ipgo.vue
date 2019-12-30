@@ -87,7 +87,7 @@ export default {
     // const response = await ApiDefault.instance.get('')
     // console.log(response.data)
     this.getIpgoData()
-    this.getIpgoSpeData()
+    this.getIpgoSpeData(0)
     var start = $('#start').data('kendoDatePicker')
     var end = $('#end').data('kendoDatePicker')
     start.max(end.value())
