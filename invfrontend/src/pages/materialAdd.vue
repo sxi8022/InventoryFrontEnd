@@ -12,12 +12,12 @@
     <br/>
     <br/>
     <div class="row">
-      <input id="parentData" type="hidden" v-model="matAdd"/>
+      <input id="parentData" v-model="matAdd" type="hidden" />
       <input id="matNo" type="hidden"/>
       <div style="margin-left:50px">
           자재명 : <input type="text" id="materialName" />
           <br/>
-          품번 : <input type="text" id="itemNo"/>
+          품번 : <input type="text" id="itemNo" />
           <br/>
           자재그룹명 : <select @change="getMaterialSubGrpData" name="matGrp" id="matGrp">
           </select>
@@ -62,7 +62,7 @@ export default {
       this.$emit('close')
     },
     async getMaterialGrpData () {
-      await this.axios.get('http://10.10.11.33/Home/MaterialGrpSearch').then(res => {
+      await this.axios.get('http://localhost:801/api/MaterialGrp').then(res => {
         for (var i = 0; i < res.data.length; i++) {
           strTemp = '<option value= ' + res.data[i].grpCd + '>' + res.data[i].grpNm + '</option>'
           $('#matGrp').append(strTemp)
@@ -72,7 +72,7 @@ export default {
     },
     getMaterialSubGrpData () {
       $('#matSub').empty()
-      this.axios.get('http://10.10.11.33/Home/MaterialSubGrpSearch?grpCd=' + $('#matGrp').val()).then(res => {
+      this.axios.get('http://localhost:801/api/MaterialGrp/' + $('#matGrp').val()).then(res => {
         for (var i = 0; i < res.data.length; i++) {
           strTemp = '<option value= ' + res.data[i].subCd + '>' + res.data[i].subNm + '</option>'
           $('#matSub').append(strTemp)
@@ -80,19 +80,30 @@ export default {
       })
     },
     saveMaterial () {
-      if ($('#matNo').val() !== '') {
-        strTemp = 'http://10.10.11.33/Home/MaterialUpdate?' + 'matNo=' + $('#matNo').val() + '&grpCd=' + $('#matGrp').val() + '&subCd=' + $('#matSub').val() + '&matNm=' + $('#materialName').val() + '&itemNo=' + $('#itemNo').val() + '&rmk=' + $('#rmk').val()
-      } else {
-        strTemp = 'http://10.10.11.33/Home/MaterialAdd?' + 'grpCd=' + $('#matGrp').val() + '&subCd=' + $('#matSub').val() + '&matNm=' + $('#materialName').val() + '&itemNo=' + $('#itemNo').val() + '&rmk=' + $('#rmk').val()
+      var requestData = {
+        matNo: $('#matNo').val(),
+        grpCd: $('#matGrp').val(),
+        subGrpCd: $('#matSub').val(),
+        matNm: $('#materialName').val(),
+        itemNo: $('#itemNo').val(),
+        rmk: $('#rmk').val()
       }
-      this.axios.get(strTemp).then(res => {
-        alert('저장하였습니다.')
-        this.closeDialog()
-      })
+      strTemp = 'http://localhost:801/api/Material'
+      if ($('#matNo').val() === '') {
+        this.axios.post(strTemp, requestData).then(res => {
+          alert('저장하였습니다.')
+          this.closeDialog()
+        })
+      } else {
+        this.axios.put(strTemp, requestData).then(res => {
+          alert('저장하였습니다.')
+          this.closeDialog()
+        })
+      }
     },
     deleteMaterial () {
-      strTemp = 'http://10.10.11.33/Home/MaterialDelete?' + 'matNo=' + $('#matNo').val()
-      this.axios.get(strTemp).then(res => {
+      strTemp = 'http://localhost:801/api/Material/' + $('#matNo').val()
+      this.axios.delete(strTemp).then(res => {
         alert('삭제하였습니다.')
         this.closeDialog()
       })

@@ -37,7 +37,7 @@
 <script>
 // import { Post } from '../api/index'
 // const ApiDefault = {
-//   url: 'http://10.10.11.33/'
+//   url: 'http://10.10.11.98/'
 // }
 // ApiDefault.instance = this.axios.create({ baseURL: ApiDefault.url })
 import materialAdd from './materialAdd.vue'
@@ -71,7 +71,7 @@ export default {
   methods: {
     getMaterialData () {
       this.localDataSource = []
-      this.axios.get('http://10.10.11.33/Home/MaterialSearch?matNm=' + this.material).then(res => {
+      this.axios.get('http://localhost:801/api/Material/' + this.material).then(res => {
         for (var i = 0; i < res.data.length; i++) {
           this.localDataSource.push(res.data[i])
         }
@@ -95,7 +95,7 @@ export default {
     onChange (ev) {
       this.selected = $.map(ev.sender.select(), function (item) {
         var strItem = ''
-        $(item).find('td').each(function () {
+        $(item).find('td').each(function (index) {
           strItem += $(this).text() + ','
         })
         strItem = strItem.substr(0, strItem.length - 1)
