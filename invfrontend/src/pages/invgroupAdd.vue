@@ -29,15 +29,18 @@ var strTemp = ''
 export default {
   data: () => ({
     matGrp: {
+      grpCd: '',
+      grpNm: '',
+      rmk: ''
     }
   }),
   props: ['grpAdd'],
   async mounted () {
     var parentData = $('#parentData').val().split(',')
     if (parentData.length > 1) {
-      $('#hidGroupCd').val(parentData[0])
-      $('#txtGroupNm').val(parentData[1])
-      $('#txtRmk').val(parentData[2])
+      this.matGrp.grpCd = parentData[0]
+      this.matGrp.grpNm = parentData[1]
+      this.matGrp.rmk = parentData[2]
       console.log($('#hidGroupCd'))
     }
   },
