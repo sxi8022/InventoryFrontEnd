@@ -44,11 +44,24 @@ export default {
       this.$emit('close', change)
     },
     saveMaterialGrp () {
+      var value = [
+        {
+          'grpCd': $('#hidGroupCd').val,
+          'grpNm': $('#txtGroupNm').val,
+          'rmk': $('#txtRmk').val
+        }
+      ]
       console.log($('#hidGroupCd').val())
       if ($('#hidGroupCd').val() !== '') {
-        strTemp = 'http://10.10.11.33/Home/MatGrpUpdate?' + 'grpCd=' + $('#hidGroupCd').val() + '&grpNm=' + $('#txtGroupNm').val() + '&rmk=' + $('#txtRmk').val()
+        // strTemp = 'http://10.10.11.33/api/group/' + 'grpCd=' + $('#hidGroupCd').val() + '&grpNm=' + $('#txtGroupNm').val() + '&rmk=' + $('#txtRmk').val()
+        strTemp = 'http://10.10.11.33/api/group/' + value
+        this.axios.post(strtemp).then(res => {
+          alert('저장하였습니다.')
+        })
       } else {
-        strTemp = 'http://10.10.11.33/Home/MatGrpAdd?' + 'grpNm=' + $('#txtGroupNm').val() + '&rmk=' + $('#txtRmk').val()
+        // strTemp = 'http://10.10.11.33/Home/MatGrpAdd?' + 'grpNm=' + $('#txtGroupNm').val() + '&rmk=' + $('#txtRmk').val()
+        strTemp = 'http://10.10.11.33/api/group/' + value
+        
       }
       console.log(strTemp)
       this.axios.get(strTemp).then(res => {
