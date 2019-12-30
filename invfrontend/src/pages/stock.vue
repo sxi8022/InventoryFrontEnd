@@ -66,7 +66,7 @@ export default {
   methods: {
     getStockData () {
       this.localDataSource = []
-      this.axios.get('http://10.10.11.98/Home/StockSearch?matNm=' + this.material).then(res => {
+      this.axios.get('http://10.10.11.98:801/api/Stock/' + this.material).then(res => {
         for (var i = 0; i < res.data.length; i++) {
           this.localDataSource.push(res.data[i])
         }
