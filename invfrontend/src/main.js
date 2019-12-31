@@ -13,6 +13,7 @@ import { DataSource, TreeListDataSource, DataSourceInstaller } from '@progress/k
 import VModal from 'vue-js-modal'
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import { store } from './js/store'
 import { Button,
   ButtonGroup,
   ButtonGroupButton,
@@ -57,7 +58,8 @@ new Vue({
     DropDownList,
     MultiSelect,
     MultiColumnComboBox,
-    MultiColumnComboBoxColumn
+    MultiColumnComboBoxColumn,
+    store
   },
   template: '<App/>'
 })
