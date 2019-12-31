@@ -49,7 +49,7 @@ export default {
   },
   methods: {
     async loginUser () {
-      var strTemp = 'http://10.10.11.33:80/api/Account'
+      var strTemp = 'http://10.10.11.98:801/api/Account'
       var loginData = {
         userId: $('#userid').val(),
         passWord: $('#password').val(),
