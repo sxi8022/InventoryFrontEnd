@@ -91,7 +91,8 @@ export default {
         if (res.data != null && res.data.tokenKey !== '') {
           this.tokenKey = res.data.access_token
           this.$cookies.set('user_session', this.tokenKey, 60 * 60)
-          console.log(this.tokenKey)
+          // console.log(this.tokenKey)
+          console.log(this.$cookies.keys())
         }
         return res.data
       })
