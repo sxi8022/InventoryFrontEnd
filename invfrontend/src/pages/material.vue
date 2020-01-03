@@ -71,7 +71,11 @@ export default {
   methods: {
     getMaterialData () {
       this.localDataSource = []
-      this.axios.get('http://10.10.11.98:801/api/Material/' + this.material).then(res => {
+      this.axios.get('http://10.10.11.98/api/Material/' + this.material, {
+        headers: {
+          'Authorization': 'Bearer ' + this.$cookies.get('user_session')
+        }
+      }).then(res => {
         for (var i = 0; i < res.data.length; i++) {
           this.localDataSource.push(res.data[i])
         }
