@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import index from '@/pages/index'
-import main from '@/pages/main'
+import mainPage from '@/pages/mainPage'
 import stock from '@/pages/stock'
 import ipgo from '@/pages/ipgo'
 import chulgo from '@/pages/chulgo'
@@ -26,9 +26,9 @@ export default new Router({
           component: login
         },
         {
-          path: '/main',
-          name: 'main',
-          component: main
+          path: '/mainPage',
+          name: 'mainPage',
+          component: mainPage
         },
         {
           path: '/stock',

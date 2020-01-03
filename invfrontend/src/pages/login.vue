@@ -69,7 +69,7 @@ export default {
           // console.log(this.$cookies.keys())
           this.cookies = this.$cookies.get('user_session')
           alert('로그인 성공하였습니다')
-          this.$router.push({ name: 'main', params: { msg: 'login' } })
+          this.$router.push({ name: 'mainPage', params: { msg: 'login' } })
           // console.log(this.cookies)
         }
         return res.data
