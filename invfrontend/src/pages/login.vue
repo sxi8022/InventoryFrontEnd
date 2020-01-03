@@ -29,7 +29,6 @@
         </div>
     </div>
 </template>
-
 <script>
 export default {
   name: 'login',
@@ -49,18 +48,55 @@ export default {
   },
   methods: {
     async loginUser () {
-      var strTemp = 'http://10.10.11.33:801/api/Account'
-      var loginData = {
-        userId: $('#userid').val(),
-        passWord: $('#password').val(),
-        state: ''
-      }
-      await this.axios.post(strTemp, loginData).then(res => {
-        alert(res.data.state)
-        return res.data.state
-      }).catch(err => {
-        console.log(err)
+      // ?username=user&password=user&grant_type=password
+      var strTemp = 'http://localhost:56433/token'
+      // var form = new FormData()
+      // form.append('username', this.userid)
+      // form.append('password', this.password)
+      // form.append('grant_type', 'password')
+      this.axios.post(strTemp, 'username=user&password=user&grant_type=password', {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      }).then(res => {
+        document.cookie = 'token=' + res.data.access_token
+        location.href = 'http://localhost:8080/material'
+      }).catch(res => {
+        alert('로그인정보가 잘못되었습니다.')
       })
+      // this.axios({
+      //   method: 'post',
+      //   url: strTemp,
+      //   headers: {
+      //     'accept': 'application/x-www-form-urlencoded',
+      //     'Content-Type': 'application/x-www-form-urlencoded',
+      //     'Access-Control-Allow-Origin': '*'
+      //   },
+      //   data: {
+      //     a: 123
+      //   }
+      // }).then(res => {
+      //   alert(res.data.state)
+      //   return res.data.state
+      // })
+      // var settings = {
+      //   'url': 'http://localhost:56433/token',
+      //   'method': 'GET',
+      //   'timeout': 0,
+      //   'headers': {
+      //     'Content-Type': 'application/x-www-form-urlencoded',
+      //     'Authorization': 'Bearer zOE7iDzMK_ck3yw1_dyZMvmnEBlX0ClK313vhkLEfgfQmHCCazCTXCY3tV8WMAwcuoIWy624hUwfcjzmbnfNSAVANrC8mJlquNgdJJVi206kTB7K2MGz7JJRgAWmQfcaV9MP5Q5zrdST7qq7nJ8GbFtKAZRdbKQZ1qOfLgjUHKaYOXXNndGQDxTSZ0Lrh1Drr6suZKjq-S83RWM7Z5dQ5A'
+      //   },
+      //   'data': {
+      //     'username': 'user',
+      //     'password': 'user',
+      //     'grant_type': 'password'
+      //   }
+      // }
+
+      // $.ajax(settings).done(function (response) {
+      //   console.log(response)
+      // })
     }
   }
 }
