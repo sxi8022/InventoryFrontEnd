@@ -15,6 +15,7 @@ import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { store } from './js/store'
 import qs from 'qs'
+import VueCookies from 'vue-cookies'
 import { Button,
   ButtonGroup,
   ButtonGroupButton,
@@ -38,6 +39,7 @@ Vue.use(DataSourceInstaller)
 Vue.use(VueMomentJS, moment)
 Vue.use(ButtonsInstaller)
 Vue.use(DropdownsInstaller)
+Vue.use(VueCookies)
 Vue.prototype.qs = qs
 
 /* eslint-disable no-new */
@@ -61,7 +63,8 @@ new Vue({
     MultiSelect,
     MultiColumnComboBox,
     MultiColumnComboBoxColumn,
-    store
+    store,
+    VueCookies
   },
   template: '<App/>'
 })

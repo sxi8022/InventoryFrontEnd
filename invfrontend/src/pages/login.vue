@@ -90,6 +90,7 @@ export default {
         // sessionStorage.setItem(this.tokenKey, res.access_token)
         if (res.data != null && res.data.tokenKey !== '') {
           this.tokenKey = res.data.access_token
+          this.$cookies.set('user_session', this.tokenKey, 60 * 60)
           console.log(this.tokenKey)
         }
         return res.data
