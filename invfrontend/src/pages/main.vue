@@ -31,7 +31,8 @@ export default {
       password: '',
       status: '',
       formkey: '',
-      tokenKey: ''
+      tokenKey: '',
+      cookies: ''
     }
   },
   computed: {
@@ -39,18 +40,19 @@ export default {
   methods: {
     async logout () {
       var strTemp = 'http://localhost:55241/Token'
-      this.userid = $('#userid').val()
-      this.password = $('#password').val()
+      this.userid = 'admin'
+      this.password = 'admin'
       this.axios.post(strTemp, 'username=' + this.userid + '&password=' + this.password + '&grant_type=password', {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded'
         }
       }).then(res => {
-        alert(JSON.stringify(res.data))
+        alert('로그아웃에 성공하였습니다')
         // sessionStorage.setItem(this.tokenKey, res.access_token)
-        this.tokenKey = res.data.access_token
-        console.log(this.tokenKey)
-        return res.data
+        this.$cookies.remove('user-session')
+        this.cookies = this.$cookies.get('user_session')
+        console.log(this.cookies)
+        this.$router.push({ path: '/', params: { msg: 'login' } })
       })
     }
   }

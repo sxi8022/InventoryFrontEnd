@@ -38,7 +38,8 @@ export default {
       userid: '',
       password: '',
       status: '',
-      formkey: ''
+      formkey: '',
+      cookies: ''
     }
   },
   computed: {
@@ -49,7 +50,7 @@ export default {
   methods: {
     async loginUser () {
       // ?username=user&password=user&grant_type=password
-      var strTemp = 'http://localhost:56433/token'
+      var strTemp = 'http://localhost:55241/token'
       // var form = new FormData()
       // form.append('username', this.userid)
       // form.append('password', this.password)
@@ -59,13 +60,17 @@ export default {
           'Content-Type': 'application/x-www-form-urlencoded'
         }
       }).then(res => {
-        alert(JSON.stringify(res.data))
+        // alert(JSON.stringify(res.data))
         // sessionStorage.setItem(this.tokenKey, res.access_token)
         if (res.data != null && res.data.tokenKey !== '') {
           this.tokenKey = res.data.access_token
           this.$cookies.set('user_session', this.tokenKey, 60 * 60)
           // console.log(this.tokenKey)
-          console.log(this.$cookies.keys())
+          // console.log(this.$cookies.keys())
+          this.cookies = this.$cookies.get('user_session')
+          alert('로그인 성공하였습니다')
+          this.$router.push({ name: 'main', params: { msg: 'login' } })
+          // console.log(this.cookies)
         }
         return res.data
       }).catch(res => {

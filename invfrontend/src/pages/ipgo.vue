@@ -92,6 +92,7 @@ export default {
     var end = $('#end').data('kendoDatePicker')
     start.max(end.value())
     end.min(start.value())
+    console.log(this.$cookies.get('user_session'))
   },
   watch: {
     fromDate: function (newval, oldval) {
