@@ -14,6 +14,7 @@ import VModal from 'vue-js-modal'
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { store } from './js/store'
+import qs from 'qs'
 import { Button,
   ButtonGroup,
   ButtonGroupButton,
@@ -37,6 +38,7 @@ Vue.use(DataSourceInstaller)
 Vue.use(VueMomentJS, moment)
 Vue.use(ButtonsInstaller)
 Vue.use(DropdownsInstaller)
+Vue.prototype.qs = qs
 
 /* eslint-disable no-new */
 new Vue({

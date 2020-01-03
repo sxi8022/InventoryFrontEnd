@@ -39,7 +39,8 @@ export default {
       userid: '',
       password: '',
       status: '',
-      formkey: ''
+      formkey: '',
+      tokenKey: ''
     }
   },
   computed: {
@@ -49,17 +50,45 @@ export default {
   },
   methods: {
     async loginUser () {
-      var strTemp = 'http://10.10.11.33:801/api/Account'
-      var loginData = {
-        userId: $('#userid').val(),
-        passWord: $('#password').val(),
-        state: ''
-      }
-      await this.axios.post(strTemp, loginData).then(res => {
-        alert(res.data.state)
-        return res.data.state
-      }).catch(err => {
-        console.log(err)
+      var strTemp = 'http://localhost:55241/Token'
+      // var loginData = {
+      //   userId: $('#userid').val(),
+      //   passWord: $('#password').val(),
+      //   grant_type: 'password'
+      // }
+      // var loginData = {
+      //   username: $('#userid').val(),
+      //   password: $('#password').val(),
+      //   grant_type: 'password'
+      // }
+      // var optionAxios = {
+      //   headers: {
+      //     'Content-Type': 'application/x-www-form-urlencoded'
+      //   }
+      // }
+      // await this.axios.post(strTemp, loginData, optionAxios).then(res => {
+      //   alert(res.data.state)
+      //   // sessionStorage.setItem(this.tokenKey, res.access_token)
+      //   return res.data.state
+      // }).catch(err => {
+      //   console.log(err)
+      // })
+      // let form = new FormData()
+      // form.append('username', 'admin')
+      // form.append('password', 'admin')
+      // form.append('grant_type', 'password')
+      // const qs = require('qs')
+      // qs.stringify({ 'username': 'admin', 'password': 'admin', 'grant_type': 'password' }
+      this.userid = $('#userid').val()
+      this.password = $('#password').val()
+      this.axios.post(strTemp, 'username=' + this.userid + '&password=' + this.password + '&grant_type=password', {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      }).then(res => {
+        alert(JSON.stringify(res.data))
+        // sessionStorage.setItem(this.tokenKey, res.access_token)
+        return res.data
       })
     }
   }
