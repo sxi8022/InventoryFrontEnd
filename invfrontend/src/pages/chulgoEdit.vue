@@ -115,7 +115,12 @@ export default {
     delchulgo () {
       if ($('#stockNo').val() !== '') {
         strTemp = 'http://10.10.11.33:8088/api/Chulgo?' + 'stockNo=' + $('#stockNo').val() + '&matNo=' + $('#matNo').val() + '&ipchulDate=' + $('#ipchulDate').val() + '&stockType=' + $('#stockType').val()
-        this.axios.delete(strTemp).then(res => {
+        this.axios.delete(strTemp, {
+          headers: {
+            'Authorization': 'Bearer ' + this.$cookies.get('user_session'),
+            'Content-Type': 'application/json'
+          }
+        }).then(res => {
           alert('삭제하였습니다.')
           this.closeDialog()
         })
