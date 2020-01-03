@@ -49,7 +49,7 @@ export default {
       this.$emit('close')
     },
     async getMaterialData () {
-      await this.axios.get('http://10.10.11.98:801/api/Material').then(res => {
+      await this.axios.get('http://10.10.11.33:8088/api/Material').then(res => {
         for (var i = 0; i < res.data.length; i++) {
           strTemp = '<option value= ' + res.data[i].matNo + '>' + res.data[i].matNm + '</option>'
           $('#matNo').append(strTemp)
@@ -78,7 +78,7 @@ export default {
         ipchulDate: $('#ipchulDate').val(),
         rmk: $('#rmk').val()
       }
-      strTemp = 'http://10.10.11.98:801/api/Ipgo'
+      strTemp = 'http://10.10.11.33:8088/api/Ipgo'
       if ($('#stockNo').val() !== '') {
         this.axios.put(strTemp, requestData).then(res => {
           alert('저장하였습니다.')

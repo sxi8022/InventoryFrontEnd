@@ -105,9 +105,9 @@ export default {
   methods: {
     getIpgoData () {
       console.log(this.localDataSource)
-      console.log('http://10.10.11.98:801/api/Ipgo?fromDate=' + this.fromDate + '&toDate=' + this.toDate)
+      console.log('http://10.10.11.33:8088/api/Ipgo?fromDate=' + this.fromDate + '&toDate=' + this.toDate)
       this.localDataSource = []
-      this.axios.get('http://10.10.11.98:801/api/Ipgo?fromDate=' + this.fromDate + '&toDate=' + this.toDate).then(res => {
+      this.axios.get('http://10.10.11.33:8088/api/Ipgo?fromDate=' + this.fromDate + '&toDate=' + this.toDate).then(res => {
         console.log(this.localDataSource)
         for (var i = 0; i < res.data.length; i++) {
           this.localDataSource.push(res.data[i])
@@ -118,9 +118,9 @@ export default {
     },
     getIpgoSpeData (stockNo, ipchulDate) {
       console.log(this.speDataSource)
-      console.log('http://10.10.11.98:801/api/Ipgo?stockNo=' + stockNo)
+      console.log('http://10.10.11.33:8088/api/Ipgo?stockNo=' + stockNo)
       this.speDataSource = []
-      this.axios.get('http://10.10.11.98:801/api/Ipgo?stockNo=' + stockNo).then(res => {
+      this.axios.get('http://10.10.11.33:8088/api/Ipgo?stockNo=' + stockNo).then(res => {
         console.log(this.speDataSource)
         for (var i = 0; i < res.data.length; i++) {
           this.speDataSource.push(res.data[i])

@@ -39,7 +39,7 @@ export default {
   },
   methods: {
     async logout () {
-      var strTemp = 'http://localhost:55241/Token'
+      var strTemp = 'http://10.10.11.33:8088/Token'
       this.userid = 'admin'
       this.password = 'admin'
       this.axios.post(strTemp, 'username=' + this.userid + '&password=' + this.password + '&grant_type=password', {
