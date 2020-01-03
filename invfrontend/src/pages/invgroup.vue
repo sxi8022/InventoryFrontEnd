@@ -72,7 +72,12 @@ export default {
     getMaterialGrpData () {
       this.arrSelected = ''
       this.localDataSource1 = []
-      this.axios.get('http://10.10.11.33:801/api/MaterialGrp').then(res => {
+      this.axios.get('http://10.10.11.33:801/api/MaterialGrp', {
+        headers: {
+          'Authorization': 'Bearer ' + this.$cookies.get('user_session'),
+          'Content-Type': 'application/json'
+        }
+      }).then(res => {
         for (var i = 0; i < res.data.length; i++) {
           this.localDataSource1.push(res.data[i])
         }
@@ -83,7 +88,12 @@ export default {
     },
     getMaterialGrpSubData () {
       this.localDataSource2 = []
-      this.axios.get('http://10.10.11.33:801/api/MaterialGrp/' + this.selectedGrp).then(res => {
+      this.axios.get('http://10.10.11.33:801/api/MaterialGrp/' + this.selectedGrp, {
+        headers: {
+          'Authorization': 'Bearer ' + this.$cookies.get('user_session'),
+          'Content-Type': 'application/json'
+        }
+      }).then(res => {
         for (var i = 0; i < res.data.length; i++) {
           this.localDataSource2.push(res.data[i])
         }

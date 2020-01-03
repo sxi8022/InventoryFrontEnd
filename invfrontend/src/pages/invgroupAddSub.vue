@@ -61,12 +61,22 @@ export default {
     saveMaterialGrp () {
       strTemp = 'http://10.10.11.33:801/api/MaterialSubGrp'
       if ($('#hidGroupCd').val() !== '' && $('#hidGroupSubCd').val() !== '') {
-        this.axios.put(strTemp, this.matSubGrp).then(res => {
+        this.axios.put(strTemp, this.matSubGrp, {
+          headers: {
+            'Authorization': 'Bearer ' + this.$cookies.get('user_session'),
+            'Content-Type': 'application/json'
+          }
+        }).then(res => {
           alert('저장하였습니다.')
           this.closeDialog(true)
         })
       } else {
-        this.axios.post(strTemp, this.matSubGrp).then(res => {
+        this.axios.post(strTemp, this.matSubGrp, {
+          headers: {
+            'Authorization': 'Bearer ' + this.$cookies.get('user_session'),
+            'Content-Type': 'application/json'
+          }
+        }).then(res => {
           alert('저장하였습니다.')
           this.closeDialog(true)
         })
@@ -77,7 +87,12 @@ export default {
     //   console.log($('#hidGroupCd').val())
       if ($('#hidGroupCd').val() !== '' && $('#hidGroupSubCd').val() !== '') {
         strTemp = 'http://10.10.11.33:801/api/MaterialSubGrp?grpCd=' + this.matSubGrp.grpCd + '&subCd=' + this.matSubGrp.subCd
-        this.axios.delete(strTemp).then(res => {
+        this.axios.delete(strTemp, {
+          headers: {
+            'Authorization': 'Bearer ' + this.$cookies.get('user_session'),
+            'Content-Type': 'application/json'
+          }
+        }).then(res => {
           alert('삭제하였습니다.')
           this.closeDialog(true)
         })
