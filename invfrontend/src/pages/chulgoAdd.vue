@@ -49,7 +49,12 @@ export default {
       this.$emit('close')
     },
     async getMaterialData () {
-      await this.axios.get('http://10.10.11.33:8088/api/Material').then(res => {
+      await this.axios.get('http://10.10.11.33:8088/api/Material', {
+        headers: {
+          'Authorization': 'Bearer ' + this.$cookies.get('user_session'),
+          'Content-Type': 'application/json'
+        }
+      }).then(res => {
         for (var i = 0; i < res.data.length; i++) {
           strTemp = '<option value= ' + res.data[i].matNo + '>' + res.data[i].matNm + '</option>'
           $('#matNo').append(strTemp)
@@ -80,12 +85,20 @@ export default {
       }
       strTemp = 'http://10.10.11.33:8088/api/Chulgo'
       if ($('#stockNo').val() !== '') {
-        this.axios.put(strTemp, requestData).then(res => {
+        this.axios.put(strTemp, requestData, {
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          }
+        }).then(res => {
           alert('저장하였습니다.')
           this.closeDialog()
         })
       } else {
-        this.axios.post(strTemp, requestData).then(res => {
+        this.axios.post(strTemp, requestData, {
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          }
+        }).then(res => {
           alert('저장하였습니다.')
           this.closeDialog()
         })

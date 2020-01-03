@@ -107,7 +107,12 @@ export default {
       console.log(this.localDataSource)
       console.log('http://10.10.11.33:8088/api/Ipgo?fromDate=' + this.fromDate + '&toDate=' + this.toDate)
       this.localDataSource = []
-      this.axios.get('http://10.10.11.33:8088/api/Ipgo?fromDate=' + this.fromDate + '&toDate=' + this.toDate).then(res => {
+      this.axios.get('http://10.10.11.33:8088/api/Ipgo?fromDate=' + this.fromDate + '&toDate=' + this.toDate, {
+        headers: {
+          'Authorization': 'Bearer ' + this.$cookies.get('user_session'),
+          'Content-Type': 'application/json'
+        }
+      }).then(res => {
         console.log(this.localDataSource)
         for (var i = 0; i < res.data.length; i++) {
           this.localDataSource.push(res.data[i])
@@ -120,7 +125,12 @@ export default {
       console.log(this.speDataSource)
       console.log('http://10.10.11.33:8088/api/Ipgo?stockNo=' + stockNo)
       this.speDataSource = []
-      this.axios.get('http://10.10.11.33:8088/api/Ipgo?stockNo=' + stockNo).then(res => {
+      this.axios.get('http://10.10.11.33:8088/api/Ipgo?stockNo=' + stockNo, {
+        headers: {
+          'Authorization': 'Bearer ' + this.$cookies.get('user_session'),
+          'Content-Type': 'application/json'
+        }
+      }).then(res => {
         console.log(this.speDataSource)
         for (var i = 0; i < res.data.length; i++) {
           this.speDataSource.push(res.data[i])
