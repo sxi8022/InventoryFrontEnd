@@ -49,7 +49,7 @@ export default {
       this.$emit('close', change)
     },
     saveMaterialGrp () {
-      strTemp = 'http://10.10.11.98:801:801/api/MaterialGrp'
+      strTemp = 'http://10.10.11.33:801:801/api/MaterialGrp'
       if ($('#hidGroupCd').val() === '') {
         this.axios.post(strTemp, this.matGrp).then(res => {
           alert('저장하였습니다.')
@@ -65,7 +65,7 @@ export default {
     deleteMaterialGrp () {
       console.log($('#hidGroupCd').val())
       if ($('#hidGroupCd').val() !== '') {
-        strTemp = 'http://10.10.11.98:801:801/api/MaterialGrp/' + $('#hidGroupCd').val()
+        strTemp = 'http://10.10.11.33:801:801/api/MaterialGrp/' + $('#hidGroupCd').val()
         this.axios.delete(strTemp).then(res => {
           alert('삭제하였습니다.')
           this.closeDialog(true)

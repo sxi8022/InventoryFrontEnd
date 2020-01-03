@@ -37,7 +37,7 @@
 <script>
 // import { Post } from '../api/index'
 // const ApiDefault = {
-//   url: 'http://10.10.11.98/'
+//   url: 'http://10.10.11.33:8088'
 // }
 // ApiDefault.instance = this.axios.create({ baseURL: ApiDefault.url })
 import materialAdd from './materialAdd.vue'
@@ -71,7 +71,7 @@ export default {
   methods: {
     getMaterialData () {
       this.localDataSource = []
-      this.axios.get('http://10.10.11.98/api/Material/' + this.material, {
+      this.axios.get('http://10.10.11.33:8088/api/Material/' + this.material, {
         headers: {
           'Authorization': 'Bearer ' + this.$cookies.get('user_session')
         }

@@ -68,7 +68,7 @@ export default {
       this.$emit('close')
     },
     async getMaterialGrpData () {
-      await this.axios.get('http://10.10.11.98/api/MaterialGrp', this.headers).then(res => {
+      await this.axios.get('http://10.10.11.33:8088/api/MaterialGrp', this.headers).then(res => {
         for (var i = 0; i < res.data.length; i++) {
           strTemp = '<option value= ' + res.data[i].grpCd + '>' + res.data[i].grpNm + '</option>'
           $('#matGrp').append(strTemp)
@@ -78,7 +78,7 @@ export default {
     },
     getMaterialSubGrpData () {
       $('#matSub').empty()
-      this.axios.get('http://10.10.11.98/api/MaterialGrp/' + $('#matGrp').val(), this.headers).then(res => {
+      this.axios.get('http://10.10.11.33:8088/api/MaterialGrp/' + $('#matGrp').val(), this.headers).then(res => {
         for (var i = 0; i < res.data.length; i++) {
           strTemp = '<option value= ' + res.data[i].subCd + '>' + res.data[i].subNm + '</option>'
           $('#matSub').append(strTemp)
@@ -94,7 +94,7 @@ export default {
         itemNo: $('#itemNo').val(),
         rmk: $('#rmk').val()
       }
-      strTemp = 'http://10.10.11.98/api/Material'
+      strTemp = 'http://10.10.11.33:8088/api/Material'
       if ($('#matNo').val() === '') {
         this.axios.post(strTemp, requestData, {
           headers: {
@@ -118,7 +118,7 @@ export default {
       }
     },
     deleteMaterial () {
-      strTemp = 'http://10.10.11.98/api/Material/' + $('#matNo').val()
+      strTemp = 'http://10.10.11.33:8088/api/Material/' + $('#matNo').val()
       this.axios.delete(strTemp, {
         headers: {
           'Authorization': 'Bearer ' + this.$cookies.get('user_session'),

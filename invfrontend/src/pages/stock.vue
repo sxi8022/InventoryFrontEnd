@@ -36,7 +36,7 @@
 <script>
 // import { Post } from '../api/index'
 // const ApiDefault = {
-//   url: 'http://10.10.11.98/'
+//   url: 'http://10.10.11.33:8088'
 // }
 // ApiDefault.instance = this.axios.create({ baseURL: ApiDefault.url })
 import materialAdd from './materialAdd.vue'
@@ -66,7 +66,7 @@ export default {
   methods: {
     getStockData () {
       this.localDataSource = []
-      this.axios.get('http://10.10.11.98:801/api/Stock/' + this.material).then(res => {
+      this.axios.get('http://10.10.11.33:801/api/Stock/' + this.material).then(res => {
         for (var i = 0; i < res.data.length; i++) {
           this.localDataSource.push(res.data[i])
         }

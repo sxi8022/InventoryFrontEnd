@@ -50,7 +50,7 @@ export default {
   methods: {
     async loginUser () {
       // ?username=user&password=user&grant_type=password
-      var strTemp = 'http://10.10.11.98/token'
+      var strTemp = 'http://10.10.11.33:8088/token'
       // var form = new FormData()
       // form.append('username', this.userid)
       // form.append('password', this.password)

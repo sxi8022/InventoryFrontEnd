@@ -95,7 +95,8 @@ export default {
       if ($('#stockNo').val() !== '') {
         this.axios.put(strTemp, requestData, {
           headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
+            'Authorization': 'Bearer ' + this.$cookies.get('user_session'),
+            'Content-Type': 'application/json'
           }
         }).then(res => {
           alert('저장하였습니다.')
@@ -104,7 +105,8 @@ export default {
       } else {
         this.axios.post(strTemp, requestData, {
           headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
+            'Authorization': 'Bearer ' + this.$cookies.get('user_session'),
+            'Content-Type': 'application/json'
           }
         }).then(res => {
           alert('저장하였습니다.')
