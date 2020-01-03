@@ -88,6 +88,8 @@ export default {
       }).then(res => {
         alert(JSON.stringify(res.data))
         // sessionStorage.setItem(this.tokenKey, res.access_token)
+        this.tokenKey = res.data.access_token
+        console.log(this.tokenKey)
         return res.data
       })
     }
