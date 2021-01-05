@@ -20,7 +20,7 @@
     "@progress/kendo-grid-vue-wrapper": "^2019.3.1023",
     "@progress/kendo-theme-default": "^4.9.0",
     "@progress/kendo-ui": "^2019.3.1113",
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "bootstrap": "^4.4.1",
     "jquery": "^3.4.1",
     "moment": "^2.24.0",
